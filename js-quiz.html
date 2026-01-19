@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار JavaScript الشامل</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            direction: rtl;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .question-number {
+            font-size: 12px;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .percentage {
+            font-size: 20px;
+            color: #155724;
+            margin: 10px 0;
+        }
+
+        .quiz-section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .quiz-container {
+            margin-bottom: 25px;
+        }
+
+        .quiz-question {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .quiz-question:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .quiz-question p {
+            margin: 0 0 15px 0;
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 16px;
+        }
+
+        .code-example {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            direction: ltr;
+            border-left: 3px solid #667eea;
+            font-size: 14px;
+        }
+
+        .quiz-question label {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .quiz-question label:hover {
+            background-color: #f5f7fa;
+        }
+
+        .quiz-question input[type="radio"] {
+            margin: 0 10px 0 0;
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+        }
+
+        .back-btn {
+            background: #95a5a6;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background: #7f8c8d;
+            transform: translateY(-2px);
+        }
+
+        .quiz-result-summary {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border: 2px solid #c3e6cb;
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 20px;
+            text-align: center;
+            color: #155724;
+            display: none;
+            animation: slideDown 0.4s ease;
+        }
+
+        .quiz-result-summary.show {
+            display: block !important;
+        }
+
+        .quiz-result-summary h4 {
+            margin: 0 0 10px 0;
+            font-size: 22px;
+            color: #155724;
+        }
+
+        .quiz-result-summary p {
+            margin: 8px 0;
+            font-size: 16px;
+        }
+
+        .score {
+            font-size: 24px;
+            font-weight: bold;
+            color: #155724;
+            margin: 10px 0;
+        }
+
+        .reset-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .reset-btn:hover {
+            background: #0056b3;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .quiz-section {
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 22px;
+            }
+
+            .buttons {
+                gap: 8px;
+            }
+
+            .submit-btn, .back-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .code-example {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚡ اختبار JavaScript الشامل</h1>
+            <p>اختبر معلوماتك في JavaScript - 30 سؤال</p>
+        </header>
+
+        <div class="quiz-section">
+            <div class="quiz-container">
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 1/30</div>
+                    <p>❓ ما هو الفرق بين var و let و const؟</p>
+                    <label><input type="radio" name="q1" value="a"> var قديمة و let/const حديثة ولها scope محدد</label>
+                    <label><input type="radio" name="q1" value="b"> لا يوجد فرق بينهم</label>
+                    <label><input type="radio" name="q1" value="c"> const يُستخدم فقط للأرقام</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 2/30</div>
+                    <p>❓ ماذا يعود من arr.map()؟</p>
+                    <label><input type="radio" name="q2" value="a"> يعدل array الأصلي</label>
+                    <label><input type="radio" name="q2" value="b"> يعود array جديد</label>
+                    <label><input type="radio" name="q2" value="c"> يعود عدد واحد</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 3/30</div>
+                    <p>❓ ما هو Hoisting؟</p>
+                    <label><input type="radio" name="q3" value="a"> تحريك المتغيرات للأعلى قبل التنفيذ</label>
+                    <label><input type="radio" name="q3" value="b"> خاصية في CSS</label>
+                    <label><input type="radio" name="q3" value="c"> نوع من الحلقات</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 4/30</div>
+                    <p>❓ كيف تستخدم Arrow Function؟</p>
+                    <label><input type="radio" name="q4" value="a"> const add = (a, b) => a + b;</label>
+                    <label><input type="radio" name="q4" value="b"> arrow functions غير صحيحة</label>
+                    <label><input type="radio" name="q4" value="c"> يجب استخدام function عادية فقط</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 5/30</div>
+                    <p>❓ ما هو DOM؟</p>
+                    <label><input type="radio" name="q5" value="a"> Document Object Model</label>
+                    <label><input type="radio" name="q5" value="b"> أداة لتصحيح الأخطاء</label>
+                    <label><input type="radio" name="q5" value="c"> نوع من قواعد البيانات</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 6/30</div>
+                    <p>❓ ما هو Closure في JavaScript؟</p>
+                    <label><input type="radio" name="q6" value="a"> دالة داخل دالة يمكنها الوصول للمتغيرات الخارجية</label>
+                    <label><input type="radio" name="q6" value="b"> حلقة معقدة</label>
+                    <label><input type="radio" name="q6" value="c"> نوع من الأخطاء</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 7/30</div>
+                    <p>❓ كيف تختبر إذا كان المتغير موجود؟</p>
+                    <label><input type="radio" name="q7" value="a"> typeof variable !== 'undefined'</label>
+                    <label><input type="radio" name="q7" value="b"> variable.exists()</label>
+                    <label><input type="radio" name="q7" value="c"> check(variable)</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 8/30</div>
+                    <p>❓ ما هو this في JavaScript؟</p>
+                    <label><input type="radio" name="q8" value="a"> يشير إلى الكائن الذي استدعى الدالة</label>
+                    <label><input type="radio" name="q8" value="b"> متغير عام</label>
+                    <label><input type="radio" name="q8" value="c"> كلمة محجوزة فقط</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 9/30</div>
+                    <p>❓ كيف تختار عنصر من الصفحة؟</p>
+                    <label><input type="radio" name="q9" value="a"> document.getElementById() أو querySelector()</label>
+                    <label><input type="radio" name="q9" value="b"> element.find()</label>
+                    <label><input type="radio" name="q9" value="c"> getElement()</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 10/30</div>
+                    <p>❓ ما هو Event في JavaScript؟</p>
+                    <label><input type="radio" name="q10" value="a"> حدث ينتج من تفاعل المستخدم</label>
+                    <label><input type="radio" name="q10" value="b"> نوع من المتغيرات</label>
+                    <label><input type="radio" name="q10" value="c"> أداة رسم</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 11/30</div>
+                    <p>❓ كيف تضيف event listener؟</p>
+                    <label><input type="radio" name="q11" value="a"> element.addEventListener('click', function)</label>
+                    <label><input type="radio" name="q11" value="b"> element.onEvent('click')</label>
+                    <label><input type="radio" name="q11" value="c"> bind(event)</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 12/30</div>
+                    <p>❓ ما هي الدالة filter()؟</p>
+                    <label><input type="radio" name="q12" value="a"> تصفي العناصر بناءً على شرط</label>
+                    <label><input type="radio" name="q12" value="b"> تحذف العناصر</label>
+                    <label><input type="radio" name="q12" value="c"> تجمع العناصر</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 13/30</div>
+                    <p>❓ ما هي الدالة reduce()؟</p>
+                    <label><input type="radio" name="q13" value="a"> تجمع عناصر array في قيمة واحدة</label>
+                    <label><input type="radio" name="q13" value="b"> تصغر حجم array</label>
+                    <label><input type="radio" name="q13" value="c"> تحذف عناصر</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 14/30</div>
+                    <p>❓ ما الفرق بين == و ===؟</p>
+                    <label><input type="radio" name="q14" value="a"> == تقارن القيم و === تقارن النوع أيضاً</label>
+                    <label><input type="radio" name="q14" value="b"> == قديمة و === حديثة</label>
+                    <label><input type="radio" name="q14" value="c"> لا يوجد فرق</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 15/30</div>
+                    <p>❓ ما هو JSON؟</p>
+                    <label><input type="radio" name="q15" value="a"> JavaScript Object Notation - صيغة لتبادل البيانات</label>
+                    <label><input type="radio" name="q15" value="b"> نوع من الحلقات</label>
+                    <label><input type="radio" name="q15" value="c"> أداة لرسم الصور</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 16/30</div>
+                    <p>❓ كيف تحول object إلى JSON؟</p>
+                    <label><input type="radio" name="q16" value="a"> JSON.stringify(object)</label>
+                    <label><input type="radio" name="q16" value="b"> object.toJSON()</label>
+                    <label><input type="radio" name="q16" value="c"> convertJSON(object)</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 17/30</div>
+                    <p>❓ ما هو Promise في JavaScript؟</p>
+                    <label><input type="radio" name="q17" value="a"> كائن يعترض العمليات غير المتزامنة</label>
+                    <label><input type="radio" name="q17" value="b"> نوع من الدوال</label>
+                    <label><input type="radio" name="q17" value="c"> متغير عام</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 18/30</div>
+                    <p>❓ ما هي الحالات في Promise؟</p>
+                    <label><input type="radio" name="q18" value="a"> pending, fulfilled, rejected</label>
+                    <label><input type="radio" name="q18" value="b"> true, false</label>
+                    <label><input type="radio" name="q18" value="c"> start, end</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 19/30</div>
+                    <p>❓ ما هي الكلمات async/await؟</p>
+                    <label><input type="radio" name="q19" value="a"> تُستخدم للعمل مع Promises بطريقة أسهل</label>
+                    <label><input type="radio" name="q19" value="b"> للبحث عن العناصر</label>
+                    <label><input type="radio" name="q19" value="c"> للحلقات</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 20/30</div>
+                    <p>❓ كيف تتعامل مع الأخطاء في try-catch؟</p>
+                    <label><input type="radio" name="q20" value="a"> try { } catch(error) { }</label>
+                    <label><input type="radio" name="q20" value="b"> error { }</label>
+                    <label><input type="radio" name="q20" value="c"> exception { }</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 21/30</div>
+                    <p>❓ ما هو Callback Function؟</p>
+                    <label><input type="radio" name="q21" value="a"> دالة تُمرر كمعامل لدالة أخرى</label>
+                    <label><input type="radio" name="q21" value="b"> دالة ترجع قيمة</label>
+                    <label><input type="radio" name="q21" value="c"> نوع من الحلقات</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 22/30</div>
+                    <p>❓ ما هي Classes في JavaScript؟</p>
+                    <label><input type="radio" name="q22" value="a"> قالب لإنشاء كائنات</label>
+                    <label><input type="radio" name="q22" value="b"> نوع من المتغيرات</label>
+                    <label><input type="radio" name="q22" value="c"> أدوات للبحث</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 23/30</div>
+                    <p>❓ ما هو setTimeout في JavaScript؟</p>
+                    <label><input type="radio" name="q23" value="a"> يتأخر تنفيذ الكود لفترة زمنية</label>
+                    <label><input type="radio" name="q23" value="b"> يكرر الكود</label>
+                    <label><input type="radio" name="q23" value="c"> يوقف التنفيذ</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 24/30</div>
+                    <p>❓ ما هو setInterval في JavaScript؟</p>
+                    <label><input type="radio" name="q24" value="a"> يكرر الكود كل فترة زمنية معينة</label>
+                    <label><input type="radio" name="q24" value="b"> يتأخر التنفيذ مرة واحدة</label>
+                    <label><input type="radio" name="q24" value="c"> يوقف الكود</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 25/30</div>
+                    <p>❓ ما هي Template Literals؟</p>
+                    <label><input type="radio" name="q25" value="a"> استخدام backticks للنصوص مع متغيرات</label>
+                    <label><input type="radio" name="q25" value="b"> نوع من الحلقات</label>
+                    <label><input type="radio" name="q25" value="c"> أنواع البيانات</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 26/30</div>
+                    <p>❓ كيف تُنشئ object في JavaScript؟</p>
+                    <label><input type="radio" name="q26" value="a"> const obj = { key: value };</label>
+                    <label><input type="radio" name="q26" value="b"> new Object();</label>
+                    <label><input type="radio" name="q26" value="c"> كلاهما صحيح</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 27/30</div>
+                    <p>❓ ما هو Spread Operator (...)؟</p>
+                    <label><input type="radio" name="q27" value="a"> ينشر عناصر array أو object</label>
+                    <label><input type="radio" name="q27" value="b"> يضيف نقاط في النص</label>
+                    <label><input type="radio" name="q27" value="c"> يحذف العناصر</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 28/30</div>
+                    <p>❓ ما هو Destructuring في JavaScript؟</p>
+                    <label><input type="radio" name="q28" value="a"> استخراج قيم من array أو object</label>
+                    <label><input type="radio" name="q28" value="b"> تحطيم الكود</label>
+                    <label><input type="radio" name="q28" value="c"> حذف البيانات</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 29/30</div>
+                    <p>❓ كيف تطبق التوريث (Inheritance)؟</p>
+                    <label><input type="radio" name="q29" value="a"> class Child extends Parent { }</label>
+                    <label><input type="radio" name="q29" value="b"> inherit(Parent)</label>
+                    <label><input type="radio" name="q29" value="c"> copy(Parent)</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 30/30</div>
+                    <p>❓ ما هو Module في JavaScript؟</p>
+                    <label><input type="radio" name="q30" value="a"> ملف يحتوي على كود قابل لإعادة الاستخدام</label>
+                    <label><input type="radio" name="q30" value="b"> نوع من المتغيرات</label>
+                    <label><input type="radio" name="q30" value="c"> أداة رسم</label>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button class="submit-btn" onclick="submitQuiz()">📊 عرض النتيجة</button>
+                <a href="index.html" class="back-btn">← العودة للرئيسية</a>
+            </div>
+
+            <div id="quizResult" class="quiz-result-summary">
+                <h4>🎉 نتيجتك</h4>
+                <p id="resultText"></p>
+                <div class="score" id="scoreDisplay"></div>
+                <div class="percentage" id="percentageDisplay"></div>
+                <p id="feedbackText"></p>
+                <button class="reset-btn" onclick="resetQuiz()">إعادة الاختبار</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            q1: 'a', q2: 'b', q3: 'a', q4: 'a', q5: 'a',
+            q6: 'a', q7: 'a', q8: 'a', q9: 'a', q10: 'a',
+            q11: 'a', q12: 'a', q13: 'a', q14: 'a', q15: 'a',
+            q16: 'a', q17: 'a', q18: 'a', q19: 'a', q20: 'a',
+            q21: 'a', q22: 'a', q23: 'a', q24: 'a', q25: 'a',
+            q26: 'c', q27: 'a', q28: 'a', q29: 'a', q30: 'a'
+        };
+
+        function submitQuiz() {
+            let score = 0;
+            let answered = 0;
+            
+            for (let i = 1; i <= 30; i++) {
+                const name = `q${i}`;
+                const radios = document.getElementsByName(name);
+                let selected = null;
+                
+                radios.forEach((r) => {
+                    if (r.checked) {
+                        selected = r.value;
+                        answered++;
+                    }
+                });
+                
+                if (selected === correctAnswers[name]) score++;
+            }
+
+            const resultDiv = document.getElementById('quizResult');
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            const percentageDisplay = document.getElementById('percentageDisplay');
+            const feedbackText = document.getElementById('feedbackText');
+            const resultText = document.getElementById('resultText');
+
+            if (answered < 30) {
+                resultText.textContent = `⚠️ يرجى الإجابة على جميع الأسئلة (أجبت على ${answered} من 30)`;
+                resultDiv.classList.add('show');
+                resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+
+            const percentage = Math.round((score / 30) * 100);
+            scoreDisplay.textContent = `${score} / 30 ✨`;
+            percentageDisplay.textContent = `النسبة: ${percentage}%`;
+            
+            if (percentage >= 90) {
+                feedbackText.textContent = '🚀 ممتاز جداً! أنت مبرمج احترافي في JavaScript';
+                resultDiv.style.background = 'linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%)';
+                resultDiv.style.borderColor = '#c3e6cb';
+            } else if (percentage >= 75) {
+                feedbackText.textContent = '🎯 ممتاز! برمجتك قوية جداً';
+                resultDiv.style.background = 'linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%)';
+                resultDiv.style.borderColor = '#c3e6cb';
+            } else if (percentage >= 60) {
+                feedbackText.textContent = '👍 جيد! لكن تدرب أكثر على JavaScript';
+                resultDiv.style.background = 'linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%)';
+                resultDiv.style.borderColor = '#ffeaa7';
+            } else {
+                feedbackText.textContent = '📚 تحتاج لمراجعة أكثر، حاول مجدداً';
+                resultDiv.style.background = 'linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%)';
+                resultDiv.style.borderColor = '#f5c6cb';
+            }
+
+            resultDiv.classList.add('show');
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function resetQuiz() {
+            document.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.checked = false;
+            });
+            document.getElementById('quizResult').classList.remove('show');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

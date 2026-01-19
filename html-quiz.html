@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار HTML للمحترفين فقط</title>
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --accent: #e94560;
+            --bg: #f0f2f5;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--bg);
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .quiz-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .question-block {
+            margin-bottom: 35px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 15px;
+        }
+        code {
+            background: #eee;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            color: #c0392b;
+        }
+        label {
+            display: block;
+            padding: 12px 15px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        label:hover {
+            background-color: #f8f9fa;
+            border-color: var(--accent);
+        }
+        input[type="radio"] {
+            margin-left: 10px;
+        }
+        .submit-area {
+            text-align: center;
+            margin-top: 40px;
+        }
+        button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 15px 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: scale(1.05);
+        }
+        #resultBox {
+            display: none;
+            margin-top: 30px;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>☠️ تحدي HTML المستوى "المستحيل"</h1>
+        <p>30 سؤالاً لن يجيب عليها إلا 1% من المطورين</p>
+    </header>
+
+    <div class="quiz-card" id="quizForm">
+        </div>
+
+    <div class="submit-area">
+        <button onclick="calculateScore()">تقديم الإجابات وفحص النتيجة</button>
+    </div>
+
+    <div id="resultBox"></div>
+</div>
+
+<script>
+const questions = [
+    {
+        q: "أي من هذه التصنيفات (Content Categories) ينتمي إليها الوسم <code>&lt;canvas&gt;</code>؟",
+        options: { a: "Flow, Phrasing, Embedded", b: "Metadata only", c: "Sectioning content" },
+        correct: "a"
+    },
+    {
+        q: "ما هو السلوك الافتراضي للمتصفح عند محاولة وضع وسم <code>&lt;div&gt;</code> داخل وسم <code>&lt;p&gt;</code>؟",
+        options: { a: "يتم إنشاء عنصر متداخل بشكل طبيعي", b: "يقوم المتصفح بإغلاق الـ p تلقائياً قبل بدء الـ div", c: "يتم تجاهل الـ div تماماً" },
+        correct: "b"
+    },
+    {
+        q: "في السمة <code>srcset</code>، ماذا ترمز الوحدة <code>w</code>؟",
+        options: { a: "عرض الشاشة (Viewport Width)", b: "عرض الصورة الحقيقي بالبكسل (Intrinsic Width)", c: "وزن الصورة بالكيلوبايت" },
+        correct: "b"
+    },
+    {
+        q: "أي قيمة لـ <code>rel</code> في الوسم <code>&lt;link&gt;</code> تستخدم لتحميل مورد سيحتاجه المستخدم في صفحة تالية لزيادة السرعة؟",
+        options: { a: "preload", b: "prefetch", c: "preconnect" },
+        correct: "b"
+    },
+    {
+        q: "ما الفرق بين <code>&lt;b&gt;</code> و <code>&lt;strong&gt;</code> في HTML5؟",
+        options: { a: "لا يوجد فرق، كلاهما يجعل النص غامقاً", b: "strong تعطي أهمية دلالية، بينما b للتنسيق البصري دون أهمية", c: "b مخصصة للعناوين فقط" },
+        correct: "b"
+    },
+    {
+        q: "أي من العناصر التالية **لا** يقبل وسوم تداخل (Void Elements)؟",
+        options: { a: "input, br, hr", b: "span, em, i", c: "section, article" },
+        correct: "a"
+    },
+    {
+        q: "ما هي الوظيفة الدقيقة للسمة <code>capture</code> في <code>&lt;input type='file'&gt;</code>؟",
+        options: { a: "تحديد حجم الملف الأقصى", b: "تفعيل الكاميرا مباشرة في الأجهزة المحمولة", c: "تشفير الملف قبل الرفع" },
+        correct: "b"
+    },
+    {
+        q: "ما هو الترتيب الصحيح لتنفيذ السكريبتات عند استخدام <code>async</code> و <code>defer</code> معاً؟",
+        options: { a: "سيتم تجاهل defer تماماً", b: "سيتم تنفيذ defer أولاً دائماً", c: "تستخدم كبديل لبعضها في حال عدم دعم المتصفح لأحدهما" },
+        correct: "c"
+    },
+    {
+        q: "ماذا يعني وجود السمة <code>reversed</code> في الوسم <code>&lt;ol&gt;</code>؟",
+        options: { a: "عكس ترتيب العناصر في DOM", b: "عكس ترقيم القائمة تنازلياً", c: "عكس اتجاه النص من اليسار لليمين" },
+        correct: "b"
+    },
+    {
+        q: "في الوسم <code>&lt;meta charset='UTF-8'&gt;</code>، لماذا يفضل وضعه في أول 1024 بايت من الملف؟",
+        options: { a: "لتسريع عملية الـ Parsing وضمان عدم حدوث خطأ في ترميز المحارف", b: "لأن معايير W3C تمنع وضعه بعد ذلك", c: "لتحسين نتائج SEO فقط" },
+        correct: "a"
+    },
+    {
+        q: "أي سمة تستخدم لربط عنصر <code>&lt;input&gt;</code> بنموذج <code>&lt;form&gt;</code> موجود في مكان آخر بالصفحة؟",
+        options: { a: "form-id", b: "form", c: "connect" },
+        correct: "b"
+    },
+    {
+        q: "ما هو العنصر المستخدم لتمثيل 'شريط جانبي' يحتوي على محتوى مرتبط بشكل غير مباشر بالمحتوى الرئيسي؟",
+        options: { a: "sidebar", b: "aside", c: "section" },
+        correct: "b"
+    },
+    {
+        q: "ما هي القيمة الافتراضية للسمة <code>type</code> في وسم <code>&lt;button&gt;</code>؟",
+        options: { a: "button", b: "submit", c: "reset" },
+        correct: "b"
+    },
+    {
+        q: "أي من هذه العناصر يعتبر 'Block-level' في الأساس البصري ولكن 'Flow Content' دلالياً؟",
+        options: { a: "address", b: "strong", c: "span" },
+        correct: "a"
+    },
+    {
+        q: "ماذا يحدث إذا تركت وسم الإغلاق <code>&lt;/li&gt;</code>؟",
+        options: { a: "يعتبر الكود خاطئاً ولن يعمل", b: "مسموح به في HTML5 وسيقوم المتصفح بإغلاقه تلقائياً", c: "سيتم دمج جميع العناصر في سطر واحد" },
+        correct: "b"
+    },
+    {
+        q: "ما الفرق بين <code>&lt;meter&gt;</code> و <code>&lt;progress&gt;</code>؟",
+        options: { a: "meter للقياسات الثابتة (مثل مساحة القرص)، وprogress للعمليات الجارية", b: "لا يوجد فرق حقيقي", c: "progress يعمل مع JS فقط" },
+        correct: "a"
+    },
+    {
+        q: "ما هي وظيفة الوسم <code>&lt;wbr&gt;</code>؟",
+        options: { a: "إضافة مسافة كبيرة", b: "تحديد نقطة مسموح للمتصفح بكسر السطر عندها إذا لزم الأمر", c: "تغيير وزن الخط" },
+        correct: "b"
+    },
+    {
+        q: "ما هو الغرض من سمة <code>nonce</code>؟",
+        options: { a: "تحسين الأداء", b: "تستخدم مع CSP (Content Security Policy) لمنع هجمات XSS", c: "لا علاقة لها بالأمن" },
+        correct: "b"
+    },
+    {
+        q: "ما هو العنصر الصحيح لاقتباس جملة قصيرة داخل فقرة نصية؟",
+        options: { a: "blockquote", b: "q", c: "cite" },
+        correct: "b"
+    },
+    {
+        q: "أي عنصر يستخدم لإظهار نتائج العمليات الحسابية التي تتم عبر JavaScript؟",
+        options: { a: "output", b: "result", c: "calc" },
+        correct: "a"
+    },
+    {
+        q: "ماذا تفعل السمة <code>nomodule</code> في وسم السكريبت؟",
+        options: { a: "تمنع السكريبت من العمل كـ Module", b: "تمنع السكريبت من العمل في المتصفحات التي تدعم الـ ES Modules", c: "تعطل السكريبت تماماً" },
+        correct: "b"
+    },
+    {
+        q: "ما هو الوسم المناسب لإحاطة 'شروح توضيحية' لصور أو رسوم بيانية؟",
+        options: { a: "caption", b: "figcaption", c: "legend" },
+        correct: "b"
+    },
+    {
+        q: "أي قيمة للخاصية <code>autocomplete</code> تمنع المتصفح تماماً من تخزين البيانات؟",
+        options: { a: "off", b: "false", c: "none" },
+        correct: "a"
+    },
+    {
+        q: "ما هو الـ <code>Shadow DOM</code> باختصار؟",
+        options: { a: "طريقة لعزل الـ CSS والـ HTML داخل عنصر معين (Web Components)", b: "النسخة المظلمة من الصفحة", c: "تقنية لتحسين الـ SEO" },
+        correct: "a"
+    },
+    {
+        q: "ما وظيفة السمة <code>contenteditable</code>؟",
+        options: { a: "تسمح للمستخدم بتعديل محتوى العنصر مباشرة في المتصفح", b: "تسمح للمطور فقط بالتعديل", c: "تجعل النص قابلاً للنسخ" },
+        correct: "a"
+    },
+    {
+        q: "ما الفرق الدلالي بين <code>&lt;time&gt;</code> و <code>&lt;data&gt;</code>؟",
+        options: { a: "time للوقت والتاريخ، وdata لأي قيمة رقمية قابلة للقراءة آلياً", b: "لا يوجد فرق", c: "data للصور فقط" },
+        correct: "a"
+    },
+    {
+        q: "ما هو السلوك الافتراضي للوسم <code>&lt;template&gt;</code>؟",
+        options: { a: "يظهر محتواه فوراً", b: "لا يتم عرض محتواه ولا تنفيذه حتى يتم استدعاؤه بـ JS", c: "يستخدم لتنسيق الجداول" },
+        correct: "b"
+    },
+    {
+        q: "ما هي سمة <code>integrity</code> المستخدمة في وسوم <code>script</code>؟",
+        options: { a: "للتأكد من عدم تعديل الملف (Hash verification)", b: "لتسريع التحميل", c: "لتحديد لغة الملف" },
+        correct: "a"
+    },
+    {
+        q: "أي عنصر يمثل 'الخيار المختار' ضمن قائمة مقترحات في <code>datalist</code>؟",
+        options: { a: "item", b: "option", c: "list-item" },
+        correct: "b"
+    },
+    {
+        q: "ما هو الغرض من الوسم <code>&lt;dialog&gt;</code>؟",
+        options: { a: "إنشاء نافذة منبثقة (Modal/Dialog box) مدعومة برمجياً", b: "للمحادثات الكتابية فقط", c: "لتنسيق النصوص المقتبسة" },
+        correct: "a"
+    }
+];
+
+function loadQuiz() {
+    const container = document.getElementById('quizForm');
+    questions.forEach((item, index) => {
+        const html = `
+            <div class="question-block">
+                <p class="question-text">${index + 1}. ${item.q}</p>
+                <label><input type="radio" name="q${index}" value="a"> ${item.options.a}</label>
+                <label><input type="radio" name="q${index}" value="b"> ${item.options.b}</label>
+                <label><input type="radio" name="q${index}" value="c"> ${item.options.c}</label>
+            </div>
+        `;
+        container.innerHTML += html;
+    });
+}
+
+function calculateScore() {
+    let score = 0;
+    questions.forEach((item, index) => {
+        const selected = document.querySelector(`input[name="q${index}"]:checked`);
+        if (selected && selected.value === item.correct) {
+            score++;
+        }
+    });
+
+    const resultBox = document.getElementById('resultBox');
+    resultBox.style.display = "block";
+    
+    let message = "";
+    if (score === 30) {
+        message = "🏆 أنت أسطورة HTML! مستواك يفوق الخيال.";
+        resultBox.style.background = "#d4edda";
+    } else if (score > 20) {
+        message = "🔥 مذهل! أنت مطور محترف جداً.";
+        resultBox.style.background = "#fff3cd";
+    } else {
+        message = "📚 مستوى جيد، لكن HTML أعمق مما تظن. استمر في التعلم!";
+        resultBox.style.background = "#f8d7da";
+    }
+
+    resultBox.innerHTML = `نتيحتك: ${score} من 30 <br> ${message}`;
+    window.scrollTo(0, document.body.scrollHeight);
+}
+
+loadQuiz();
+</script>
+
+</body>
+</html>

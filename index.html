@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شرح HTML و CSS و JavaScript الكامل</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>� تعليم الويب الكامل</h1>
+        <p>HTML • CSS • JavaScript بطريقة تفاعلية وسهلة</p>        <div style="margin-top: 20px; text-align: center;">
+            <a href="html-detailed.html" style="background: #667eea; color: white; padding: 10px 20px; margin: 5px; text-decoration: none; border-radius: 5px; display: inline-block; transition: transform 0.2s;">📄 شرح HTML التفصيلي</a>
+            <a href="css-detailed.html" style="background: #667eea; color: white; padding: 10px 20px; margin: 5px; text-decoration: none; border-radius: 5px; display: inline-block; transition: transform 0.2s;">🎨 شرح CSS التفصيلي</a>
+            <a href="js-detailed.html" style="background: #667eea; color: white; padding: 10px 20px; margin: 5px; text-decoration: none; border-radius: 5px; display: inline-block; transition: transform 0.2s;">⚡ شرح JavaScript التفصيلي</a>
+        </div>
+        <div style="margin-top: 15px; text-align: center;">
+            <a href="html-quiz.html" style="background: #764ba2; color: white; padding: 10px 20px; margin: 5px; text-decoration: none; border-radius: 5px; display: inline-block; transition: transform 0.2s;">📋 اختبار HTML</a>
+            <a href="css-quiz.html" style="background: #764ba2; color: white; padding: 10px 20px; margin: 5px; text-decoration: none; border-radius: 5px; display: inline-block; transition: transform 0.2s;">🎨 اختبار CSS</a>
+            <a href="js-quiz.html" style="background: #764ba2; color: white; padding: 10px 20px; margin: 5px; text-decoration: none; border-radius: 5px; display: inline-block; transition: transform 0.2s;">⚡ اختبار JavaScript</a>
+        </div>    </header>
+
+    <!-- قسم HTML -->
+    <div class="language-section" id="html-section">
+        <h2 class="language-title">📄 لغة HTML</h2>
+        <p class="language-desc">لغة الترميز لإنشاء محتوى صفحات الويب</p>
+        
+        <div class="cards-grid">
+            <!-- الكارت الأول -->
+            <div class="card" onclick="showDetail(this, 'html-1')">
+                <div class="card-icon">🏗️</div>
+                <h3>هيكل المستند</h3>
+                <p>تعلم العناصر الأساسية للـ HTML</p>
+            </div>
+
+            <div class="card" onclick="showDetail(this, 'html-2')">
+                <div class="card-icon">📝</div>
+                <h3>العناوين والنصوص</h3>
+                <p>h1-h6 والفقرات والروابط</p>
+            </div>
+
+            <div class="card" onclick="showDetail(this, 'html-3')">
+                <div class="card-icon">📋</div>
+                <h3>القوائم والجداول</h3>
+                <p>القوائم المرتبة وغير المرتبة والجداول</p>
+            </div>
+
+            <div class="card" onclick="showDetail(this, 'html-4')">
+                <div class="card-icon">📸</div>
+                <h3>الوسائط والنماذج</h3>
+                <p>الصور والفيديو والنماذج التفاعلية</p>
+            </div>
+
+            <div class="card" onclick="showDetail(this, 'html-5')">
+                <div class="card-icon">🏷️</div>
+                <h3>السمات والمعرّفات</h3>
+                <p>Class و ID والسمات المهمة الأخرى</p>
+            </div>
+
+            <div class="card" onclick="showDetail(this, 'html-6')">
+                <div class="card-icon">⚙️</div>
+                <h3>العناصر الدلالية</h3>
+                <p>Header, Nav, Main, Footer وغيرها</p>
+            </div>
+        </div>
+
+        <!-- تفاصيل HTML -->
+        <div class="detail-content" id="html-1" style="display:none;">
+            <button class="close-btn" onclick="closeDetail(this)">✕</button>
+            <h3>هيكل المستند HTML</h3>
+            <p>كل صفحة ويب تحتاج إلى هيكل أساسي:</p>
+            <pre class="code-block"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;عنوان الصفحة&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;مرحباً&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            <ul class="highlight-list">
+                <li><strong>&lt;!DOCTYPE html&gt;</strong> - يخبر المتصفح أنها HTML5</li>
+                <li><strong>&lt;html&gt;</strong> - العنصر الجذر</li>
+                <li><strong>&lt;head&gt;</strong> - معلومات الصفحة والمرجعيات</li>
+                <li><strong>&lt;body&gt;</strong> - المحتوى المرئي</li>
+            </ul>
+            <div class="mini-quiz">
+                <p><strong>❓ اختبر معك:</strong> أين يتم وضع عنوان الصفحة؟</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="html1" value="a"> داخل body</label>
+                    <label><input type="radio" name="html1" value="b"> داخل head</label>
+                    <label><input type="radio" name="html1" value="c"> خارج html</label>
+                </div>
+                <button onclick="checkQuiz('html1', 'b')">تحقق من الإجابة</button>
+                <div class="quiz-result"></div>
+            </div>
+        </div>
+
+        <div class="detail-content" id="html-2" style="display:none;">
+            <button class="close-btn" onclick="closeDetail(this)">✕</button>
+            <h3>العناوين والنصوص</h3>
+            <pre class="code-block"><code>&lt;h1&gt;العنوان الرئيسي&lt;/h1&gt;
+&lt;h2&gt;عنوان فرعي&lt;/h2&gt;
+&lt;p&gt;هذا نص عادي&lt;/p&gt;
+&lt;a href="www.google.com"&gt;رابط&lt;/a&gt;
+&lt;strong&gt;نص غامق&lt;/strong&gt;
+&lt;em&gt;نص مائل&lt;/em&gt;</code></pre>
+            <ul class="highlight-list">
+                <li><strong>h1 إلى h6</strong> - عناوين بأولويات مختلفة (h1 الأهم)</li>
+                <li><strong>&lt;p&gt;</strong> - فقرة نص</li>
+                <li><strong>&lt;a href=""&gt;</strong> - رابط تشعبي</li>
+                <li><strong>&lt;strong&gt;</strong> - نص غامق ومهم</li>
+                <li><strong>&lt;em&gt;</strong> - نص مائل</li>
+            </ul>
+            <div class="mini-quiz">
+                <p><strong>❓ اختبر معك:</strong> ما الفرق بين h1 و h2؟</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="html2" value="a"> h1 أكبر من h2</label>
+                    <label><input type="radio" name="html2" value="b"> h1 له أهمية أعلى في الـ SEO</label>
+                    <label><input type="radio" name="html2" value="c"> الاثنان متطابقان</label>
+                </div>
+                <button onclick="checkQuiz('html2', 'b')">تحقق من الإجابة</button>
+                <div class="quiz-result"></div>
+            </div>
+        </div>
+
+        <div class="detail-content" id="html-3" style="display:none;">
+            <button class="close-btn" onclick="closeDetail(this)">✕</button>
+            <h3>القوائم والجداول</h3>
+            <pre class="code-block"><code>&lt;!-- قائمة غير مرتبة --&gt;
+&lt;ul&gt;
+  &lt;li&gt;العنصر الأول&lt;/li&gt;
+  &lt;li&gt;العنصر الثاني&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- قائمة مرتبة --&gt;
+&lt;ol&gt;
+  &lt;li&gt;الأول&lt;/li&gt;
+  &lt;li&gt;الثاني&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;!-- جدول --&gt;
+&lt;table&gt;
+  &lt;tr&gt;&lt;th&gt;الرأس&lt;/th&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;البيانات&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+            <div class="mini-quiz">
+                <p><strong>❓ اختبر معك:</strong> أي عنصر تستخدم لقائمة مرتبة؟</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="html3" value="a"> ul</label>
+                    <label><input type="radio" name="html3" value="b"> ol</label>
+                    <label><input type="radio" name="html3" value="c"> table</label>
+                </div>
+                <button onclick="checkQuiz('html3', 'b')">تحقق من الإجابة</button>
+                <div class="quiz-result"></div>
+            </div>
+        </div>
+
+        <div class="detail-content" id="html-4" style="display:none;">
+            <button class="close-btn" onclick="closeDetail(this)">✕</button>
+            <h3>الوسائط والنماذج</h3>
+            <pre class="code-block"><code>&lt;!-- صورة --&gt;
+&lt;img src="image.jpg" alt="وصف الصورة"&gt;
+
+&lt;!-- فيديو --&gt;
+&lt;video controls width="400"&gt;
+  &lt;source src="video.mp4"&gt;
+&lt;/video&gt;
+
+&lt;!-- نموذج --&gt;
+&lt;form&gt;
+  &lt;label&gt;الاسم:&lt;/label&gt;
+  &lt;input type="text"&gt;
+  &lt;button&gt;إرسال&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+            <div class="mini-quiz">
+                <p><strong>❓ اختبر معك:</strong> ما السمة المهمة في عنصر الصورة؟</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="html4" value="a"> src فقط</label>
+                    <label><input type="radio" name="html4" value="b"> alt فقط</label>
+                    <label><input type="radio" name="html4" value="c"> src و alt معاً</label>
+                </div>
+                <button onclick="checkQuiz('html4', 'c')">تحقق من الإجابة</button>
+                <div class="quiz-result"></div>
+            </div>
+        </div>
+
+        <div class="detail-content" id="html-5" style="display:none;">
+            <button class="close-btn" onclick="closeDetail(this)">✕</button>
+            <h3>السمات والمعرّفات</h3>
+            <pre class="code-block"><code>&lt;!-- Class للتنسيق المتعدد --&gt;
+&lt;div class="card box"&gt;محتوى&lt;/div&gt;
+
+&lt;!-- ID المعرّف الفريد --&gt;
+&lt;div id="header"&gt;رأس الصفحة&lt;/div&gt;
+
+&lt;!-- سمات أخرى --&gt;
+&lt;input type="email" placeholder="بريدك الإلكتروني"&gt;
+&lt;button disabled&gt;غير مفعّل&lt;/button&gt;
+&lt;div data-value="100"&gt;بيانات مخصصة&lt;/div&gt;</code></pre>
+            <div class="mini-quiz">
+                <p><strong>❓ اختبر معك:</strong> كم ID يمكن أن يكون لعنصر واحد؟</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="html5" value="a"> واحد فقط</label>
+                    <label><input type="radio" name="html5" value="b"> عدة IDs</label>
+                    <label><input type="radio" name="html5" value="c"> لا حد</label>
+                </div>
+                <button onclick="checkQuiz('html5', 'a')">تحقق من الإجابة</button>
+                <div class="quiz-result"></div>
+            </div>
+        </div>
+
+        <div class="detail-content" id="html-6" style="display:none;">
+            <button class="close-btn" onclick="closeDetail(this)">✕</button>
+            <h3>العناصر الدلالية</h3>
+            <pre class="code-block"><code>&lt;header&gt;رأس الصفحة&lt;/header&gt;
+&lt;nav&gt;قائمة التنقل&lt;/nav&gt;
+&lt;main&gt;المحتوى الرئيسي&lt;/main&gt;
+&lt;article&gt;مقالة&lt;/article&gt;
+&lt;section&gt;قسم&lt;/section&gt;
+&lt;aside&gt;محتوى جانبي&lt;/aside&gt;
+&lt;footer&gt;تذييل الصفحة&lt;/footer&gt;</code></pre>
+            <p class="note">هذه العناصر توضح معنى المحتوى وتحسّن الـ SEO</p>
+            <div class="mini-quiz">
+                <p><strong>❓ اختبر معك:</strong> أي من هذه عناصر دلالية؟</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="html6" value="a"> div و span</label>
+                    <label><input type="radio" name="html6" value="b"> header و nav و main</label>
+                    <label><input type="radio" name="html6" value="c"> p و a و h1</label>
+                </div>
+                <button onclick="checkQuiz('html6', 'b')">تحقق من الإجابة</button>
+                <div class="quiz-result"></div>
+            </div>
+        </div>
+    <!-- قسم CSS -->
+    <div class="language-section" id="css-section">
+        <h2 class="language-title">🎨 لغة CSS</h2>
+        <p class="language-desc">لغة التنسيق لتجميل صفحات الويب</p>
+        
+        <div class="cards-grid">
+            <div class="card" onclick="showDetail(this, 'css-1')">
+                <div class="card-icon">📐</div>
+                <h3>الصيغة الأساسية</h3>
+                <p>كيفية كتابة قواعد CSS</p>
+            </div>
+
+            <div class="card" onclick="showDetail(this, 'css-2')">
+                <div class="card-icon">🎯</div>
+                <h3>المحددات</h3>
+                <p>Selectors والاختيارات</p>
+            </div>
+
+            <div class="card" onclick="showDetail(this, 'css-3')">
+                <div class="card-icon">📦</div>
+                <h3>نموذج الصندوق</h3>
+                <p>Margin, Padding, Border</p>
+            </div>
+
+            <div class="card" onclick="showDetail(this, 'css-4')">
+                <div class="card-icon">🌈</div>
+                <h3>الألوان والخطوط</h3>
+                <p>تلوين وتنسيق النصوص</p>
+            </div>
+
+            <div class="card" onclick="showDetail(this, 'css-5')">
+                <div class="card-icon">📏</div>
+                <h3>التخطيط والمواضع</h3>
+                <p>Flexbox, Grid, Position</p>
+            </div>
+
+            <div class="card" onclick="showDetail(this, 'css-6')">
+                <div class="card-icon">✨</div>
+                <h3>التأثيرات والحركات</h3>
+                <p>Transitions, Animations, Effects</p>
+            </div>
+        </div>
+
+        <!-- تفاصيل CSS -->
+        <div class="detail-content" id="css-1" style="display:none;">
+            <button class="close-btn" onclick="closeDetail(this)">✕</button>
+            <h3>الصيغة الأساسية للـ CSS</h3>
+            <pre class="code-block"><code>/* محدد { خاصية: قيمة; } */
+
+h1 {
+  color: blue;
+  font-size: 24px;
+}
+
+/* عدة عناصر */
+h1, h2, h3 {
+  color: navy;
+}
+
+/* العنصر بالداخل */
+div p {
+  margin: 10px;
+}</code></pre>
+            <div class="mini-quiz">
+                <p><strong>❓ اختبر معك:</strong> ما صيغة كتابة قاعدة CSS صحيحة؟</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="css1" value="a"> p color: red;</label>
+                    <label><input type="radio" name="css1" value="b"> p { color: red; }</label>
+                    <label><input type="radio" name="css1" value="c"> color: red; p</label>
+                </div>
+                <button onclick="checkQuiz('css1', 'b')">تحقق من الإجابة</button>
+                <div class="quiz-result"></div>
+            </div>
+        </div>
+
+        <div class="detail-content" id="css-2" style="display:none;">
+            <button class="close-btn" onclick="closeDetail(this)">✕</button>
+            <h3>أنواع المحددات</h3>
+            <pre class="code-block"><code>/* محدد العنصر */
+p { color: black; }
+
+/* محدد الفئة */
+.card { background: white; }
+
+/* محدد المعرّف */
+#header { height: 50px; }
+
+/* محدد السمة */
+input[type="email"] { border: 1px solid gray; }
+
+/* محددات متقدمة */
+.card:hover { transform: scale(1.05); }
+li:first-child { font-weight: bold; }
+li:nth-child(2n) { background: gray; }</code></pre>
+            <div class="mini-quiz">
+                <p><strong>❓ اختبر معك:</strong> أي محدد له الأولوية الأعلى؟</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="css2" value="a"> محدد العنصر</label>
+                    <label><input type="radio" name="css2" value="b"> محدد الفئة</label>
+                    <label><input type="radio" name="css2" value="c"> محدد المعرّف</label>
+                </div>
+                <button onclick="checkQuiz('css2', 'c')">تحقق من الإجابة</button>
+                <div class="quiz-result"></div>
+            </div>
+        </div>
+
+        <div class="detail-content" id="css-3" style="display:none;">
+            <button class="close-btn" onclick="closeDetail(this)">✕</button>
+            <h3>نموذج الصندوق</h3>
+            <pre class="code-block"><code>.box {
+  /* المسافة من الحدود الخارجية */
+  margin: 20px;
+  
+  /* الحد الخارجي */
+  border: 2px solid black;
+  
+  /* المسافة الداخلية */
+  padding: 15px;
+  
+  /* محتوى الصندوق */
+  width: 300px;
+  height: 200px;
+}
+
+/* طريقة مختصرة */
+.box {
+  margin: 10px 20px 30px 40px; /* top right bottom left */
+  padding: 10px 20px; /* vertical horizontal */
+}</code></pre>
+            <div class="mini-quiz">
+                <p><strong>❓ اختبر معك:</strong> ما الفرق بين margin و padding؟</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="css3" value="a"> لا فرق بينهما</label>
+                    <label><input type="radio" name="css3" value="b"> margin خارجي و padding داخلي</label>
+                    <label><input type="radio" name="css3" value="c"> padding خارجي و margin داخلي</label>
+                </div>
+                <button onclick="checkQuiz('css3', 'b')">تحقق من الإجابة</button>
+                <div class="quiz-result"></div>
+            </div>
+        </div>
+
+        <div class="detail-content" id="css-4" style="display:none;">
+            <button class="close-btn" onclick="closeDetail(this)">✕</button>
+            <h3>الألوان والخطوط</h3>
+            <pre class="code-block"><code>.text {
+  /* الألوان بطرق مختلفة */
+  color: red; /* باللغة الإنجليزية */
+  color: #FF0000; /* بـ Hex */
+  color: rgb(255, 0, 0); /* بـ RGB */
+  background: rgba(0, 0, 0, 0.5); /* مع الشفافية */
+  
+  /* الخطوط */
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: bold; /* 400 عادي، 700 غامق */
+  font-style: italic;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: underline;
+}</code></pre>
+            <div class="mini-quiz">
+                <p><strong>❓ اختبر معك:</strong> كم قيمة لخاصية color؟</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="css4" value="a"> قيمة واحدة فقط</label>
+                    <label><input type="radio" name="css4" value="b"> عدة طرق (اسم، hex، rgb)</label>
+                    <label><input type="radio" name="css4" value="c"> لا توجد قيم</label>
+                </div>
+                <button onclick="checkQuiz('css4', 'b')">تحقق من الإجابة</button>
+                <div class="quiz-result"></div>
+            </div>
+        </div>
+
+        <div class="detail-content" id="css-5" style="display:none;">
+            <button class="close-btn" onclick="closeDetail(this)">✕</button>
+            <h3>التخطيط والمواضع</h3>
+            <pre class="code-block"><code>/* Flexbox - المرن */
+.flex-container {
+  display: flex;
+  justify-content: center; /* أفقياً */
+  align-items: center; /* عمودياً */
+  gap: 10px;
+}
+
+/* Grid - الشبكة */
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
+}
+
+/* المواضع */
+.absolute {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+}</code></pre>
+            <div class="mini-quiz">
+                <p><strong>❓ اختبر معك:</strong> ما الفرق بين Flexbox و Grid؟</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="css5" value="a"> Flexbox أحادي البعد و Grid ثنائي</label>
+                    <label><input type="radio" name="css5" value="b"> Grid أحادي البعد و Flexbox ثنائي</label>
+                    <label><input type="radio" name="css5" value="c"> متطابقان</label>
+                </div>
+                <button onclick="checkQuiz('css5', 'a')">تحقق من الإجابة</button>
+                <div class="quiz-result"></div>
+            </div>
+        </div>
+
+        <div class="detail-content" id="css-6" style="display:none;">
+            <button class="close-btn" onclick="closeDetail(this)">✕</button>
+            <h3>التأثيرات والحركات</h3>
+            <pre class="code-block"><code>/* الانتقال السلس */
+.button {
+  background: blue;
+  transition: background 0.3s ease;
+}
+
+.button:hover {
+  background: red;
+}
+
+/* الحركات */
+@keyframes slideIn {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+.animated {
+  animation: slideIn 0.5s ease;
+}
+
+/* التأثيرات الأخرى */
+.shadow { box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+.blur { filter: blur(5px); }
+.scale { transform: scale(1.1); }</code></pre>
+            <div class="mini-quiz">
+                <p><strong>❓ اختبر معك:</strong> ما الفرق بين transition و animation؟</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="css6" value="a"> لا فرق</label>
+                    <label><input type="radio" name="css6" value="b"> transition انتقال وanimation حركة معقدة</label>
+                    <label><input type="radio" name="css6" value="c"> animation انتقال و transition حركة</label>
+                </div>
+                <button onclick="checkQuiz('css6', 'b')">تحقق من الإجابة</button>
+                <div class="quiz-result"></div>
+            </div>
+        </div>
+
+        
+
+    <!-- قسم JavaScript -->
+    <div class="language-section" id="js-section">
+        <h2 class="language-title">⚡ لغة JavaScript</h2>
+        <p class="language-desc">لغة البرمجة لإضافة تفاعلية للويب</p>
+        
+        <div class="cards-grid">
+            <div class="card" onclick="showDetail(this, 'js-1')">
+                <div class="card-icon">📊</div>
+                <h3>المتغيرات والبيانات</h3>
+                <p>var, let, const والأنواع</p>
+            </div>
+
+            <div class="card" onclick="showDetail(this, 'js-2')">
+                <div class="card-icon">🔀</div>
+                <h3>الشروط والحلقات</h3>
+                <p>if/else, for, while</p>
+            </div>
+
+            <div class="card" onclick="showDetail(this, 'js-3')">
+                <div class="card-icon">🔧</div>
+                <h3>الدوال والكائنات</h3>
+                <p>Functions والـ Objects</p>
+            </div>
+
+            <div class="card" onclick="showDetail(this, 'js-4')">
+                <div class="card-icon">📈</div>
+                <h3>المصفوفات والعمليات</h3>
+                <p>Arrays والتعديلات عليها</p>
+            </div>
+
+            <div class="card" onclick="showDetail(this, 'js-5')">
+                <div class="card-icon">🎮</div>
+                <h3>التعامل مع الـ DOM</h3>
+                <p>تعديل عناصر الصفحة</p>
+            </div>
+
+            <div class="card" onclick="showDetail(this, 'js-6')">
+                <div class="card-icon">🌐</div>
+                <h3>الأحداث والتفاعل</h3>
+                <p>Events والمستمعين</p>
+            </div>
+        </div>
+
+        <!-- تفاصيل JavaScript -->
+        <div class="detail-content" id="js-1" style="display:none;">
+            <button class="close-btn" onclick="closeDetail(this)">✕</button>
+            <h3>المتغيرات والبيانات</h3>
+            <pre class="code-block"><code>// التصريح عن متغيرات
+let name = "أحمد"; // متغير يمكن تعديله
+const age = 25; // ثابت لا يمكن تعديله
+var city = "القاهرة"; // قديم، تجنبه
+
+// أنواع البيانات
+let number = 42; // رقم
+let text = "نص"; // نص
+let flag = true; // قيمة منطقية
+let empty = null; // قيمة فارغة
+let unknown; // غير معرف
+let list = [1, 2, 3]; // مصفوفة
+let obj = {name: "علي", age: 30}; // كائن</code></pre>
+            <div class="mini-quiz">
+                <p><strong>❓ اختبر معك:</strong> ما الفرق بين let و const؟</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="js1" value="a"> let ثابت و const متغير</label>
+                    <label><input type="radio" name="js1" value="b"> const ثابت و let متغير</label>
+                    <label><input type="radio" name="js1" value="c"> لا فرق</label>
+                </div>
+                <button onclick="checkQuiz('js1', 'b')">تحقق من الإجابة</button>
+                <div class="quiz-result"></div>
+            </div>
+        </div>
+
+        <div class="detail-content" id="js-2" style="display:none;">
+            <button class="close-btn" onclick="closeDetail(this)">✕</button>
+            <h3>الشروط والحلقات</h3>
+            <pre class="code-block"><code>// الشروط
+if (age > 18) {
+  console.log("بالغ");
+} else if (age > 12) {
+  console.log("مراهق");
+} else {
+  console.log("طفل");
+}
+
+// الحلقة for
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+
+// حلقة while
+while (age < 30) {
+  age++;
+}
+
+// حلقة on arrays
+let fruits = ["تفاح", "موز", "برتقال"];
+fruits.forEach(fruit => {
+  console.log(fruit);
+});</code></pre>
+            <div class="mini-quiz">
+                <p><strong>❓ اختبر معك:</strong> أي شرط ينفذ إذا كان الشرط خاطئ؟</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="js2" value="a"> if</label>
+                    <label><input type="radio" name="js2" value="b"> else</label>
+                    <label><input type="radio" name="js2" value="c"> while</label>
+                </div>
+                <button onclick="checkQuiz('js2', 'b')">تحقق من الإجابة</button>
+                <div class="quiz-result"></div>
+            </div>
+        </div>
+
+        <div class="detail-content" id="js-3" style="display:none;">
+            <button class="close-btn" onclick="closeDetail(this)">✕</button>
+            <h3>الدوال والكائنات</h3>
+            <pre class="code-block"><code>// الدالة العادية
+function add(a, b) {
+  return a + b;
+}
+
+// دالة سهمية
+const multiply = (a, b) => a * b;
+
+// الكائن
+let person = {
+  name: "محمد",
+  age: 28,
+  city: "الرياض",
+  greet: function() {
+    console.log("مرحباً!");
+  }
+};
+
+// الوصول للبيانات
+console.log(person.name);
+person.greet();</code></pre>
+            <div class="mini-quiz">
+                <p><strong>❓ اختبر معك:</strong> كيف تستدعي دالة؟</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="js3" value="a"> functionName;</label>
+                    <label><input type="radio" name="js3" value="b"> functionName()</label>
+                    <label><input type="radio" name="js3" value="c"> function functionName</label>
+                </div>
+                <button onclick="checkQuiz('js3', 'b')">تحقق من الإجابة</button>
+                <div class="quiz-result"></div>
+            </div>
+        </div>
+
+        <div class="detail-content" id="js-4" style="display:none;">
+            <button class="close-btn" onclick="closeDetail(this)">✕</button>
+            <h3>المصفوفات والعمليات</h3>
+            <pre class="code-block"><code>let numbers = [1, 2, 3, 4, 5];
+
+// الإضافة والحذف
+numbers.push(6); // إضافة في النهاية
+numbers.pop(); // حذف من النهاية
+numbers.shift(); // حذف من البداية
+numbers.unshift(0); // إضافة في البداية
+
+// التحويل
+let doubled = numbers.map(n => n * 2);
+let even = numbers.filter(n => n % 2 === 0);
+let sum = numbers.reduce((a, b) => a + b, 0);
+
+// البحث
+let found = numbers.find(n => n > 3);
+let index = numbers.indexOf(3);</code></pre>
+            <div class="mini-quiz">
+                <p><strong>❓ اختبر معك:</strong> ما دالة تحويل مصفوفة؟</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="js4" value="a"> push</label>
+                    <label><input type="radio" name="js4" value="b"> map</label>
+                    <label><input type="radio" name="js4" value="c"> length</label>
+                </div>
+                <button onclick="checkQuiz('js4', 'b')">تحقق من الإجابة</button>
+                <div class="quiz-result"></div>
+            </div>
+        </div>
+
+        <div class="detail-content" id="js-5" style="display:none;">
+            <button class="close-btn" onclick="closeDetail(this)">✕</button>
+            <h3>التعامل مع الـ DOM</h3>
+            <pre class="code-block"><code>// اختيار العناصر
+let element = document.getElementById("myId");
+let elements = document.querySelectorAll(".card");
+
+// تعديل المحتوى
+element.textContent = "نص جديد";
+element.innerHTML = "&lt;strong&gt;نص غامق&lt;/strong&gt;";
+
+// تعديل الأنماط
+element.style.color = "red";
+element.style.display = "block";
+
+// إضافة/حذف الفئات
+element.classList.add("active");
+element.classList.remove("hidden");
+element.classList.toggle("visible");
+
+// الخصائص
+element.getAttribute("data-id");
+element.setAttribute("title", "تلميح");</code></pre>
+            <div class="mini-quiz">
+                <p><strong>❓ اختبر معك:</strong> كيف تختار عنصر بـ ID في JavaScript؟</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="js5" value="a"> document.querySelector(".id")</label>
+                    <label><input type="radio" name="js5" value="b"> document.getElementById("id")</label>
+                    <label><input type="radio" name="js5" value="c"> document.getClass("id")</label>
+                </div>
+                <button onclick="checkQuiz('js5', 'b')">تحقق من الإجابة</button>
+                <div class="quiz-result"></div>
+            </div>
+        </div>
+
+        <div class="detail-content" id="js-6" style="display:none;">
+            <button class="close-btn" onclick="closeDetail(this)">✕</button>
+            <h3>الأحداث والتفاعل</h3>
+            <pre class="code-block"><code>// الاستماع للأحداث
+let button = document.getElementById("btn");
+
+button.addEventListener("click", function() {
+  console.log("تم الضغط!");
+});
+
+// الأحداث الشائعة
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("تم تحميل الصفحة");
+});
+
+element.addEventListener("mouseover", () => {
+  console.log("الماوس فوق العنصر");
+});
+
+input.addEventListener("change", () => {
+  console.log("تم تغيير القيمة");
+});
+
+// حذف المستمع
+button.removeEventListener("click", handler);</code></pre>
+            <div class="mini-quiz">
+                <p><strong>❓ اختبر معك:</strong> أي حدث يحدث عند الضغط على الزر؟</p>
+                <div class="quiz-options">
+                    <label><input type="radio" name="js6" value="a"> mouseover</label>
+                    <label><input type="radio" name="js6" value="b"> click</label>
+                    <label><input type="radio" name="js6" value="c"> change</label>
+                </div>
+                <button onclick="checkQuiz('js6', 'b')">تحقق من الإجابة</button>
+                <div class="quiz-result"></div>
+            </div>
+        </div>
+    </div>
+        <p>💻 تعليم الويب الشامل | HTML • CSS • JavaScript</p>
+    </footer>
+    <script>
+        // دوال إظهار التفاصيل
+        function showDetail(cardElement, detailId) {
+            // إغلاق جميع التفاصيل المفتوحة
+            const allDetails = document.querySelectorAll('.detail-content');
+            allDetails.forEach(detail => {
+                if (detail.id !== detailId) {
+                    detail.style.display = 'none';
+                }
+            });
+
+            // فتح التفصيل المختار
+            const detailElement = document.getElementById(detailId);
+            if (detailElement) {
+                detailElement.style.display = 'block';
+                detailElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            // تمييز الكارت النشط
+            const allCards = cardElement.parentElement.querySelectorAll('.card');
+            allCards.forEach(card => card.classList.remove('active'));
+            cardElement.classList.add('active');
+        }
+
+        function closeDetail(closeBtn) {
+            const detailContent = closeBtn.parentElement;
+            detailContent.style.display = 'none';
+            
+            // إزالة التمييز من الكارتات
+            const cards = document.querySelectorAll('.card.active');
+            cards.forEach(card => card.classList.remove('active'));
+        }
+
+        // دوال الاختبارات الصغيرة
+        function checkQuiz(quizName, correctAnswer) {
+            const selected = document.querySelector(`input[name="${quizName}"]:checked`);
+            const resultDiv = selected.closest('.mini-quiz').querySelector('.quiz-result');
+            
+            if (!selected) {
+                resultDiv.innerHTML = '⚠️ يرجى اختيار إجابة';
+                resultDiv.className = 'quiz-result warning';
+                return;
+            }
+            
+            if (selected.value === correctAnswer) {
+                resultDiv.innerHTML = '✅ إجابة صحيحة! ممتاز!';
+                resultDiv.className = 'quiz-result correct';
+            } else {
+                resultDiv.innerHTML = '❌ إجابة خاطئة، حاول مجدداً';
+                resultDiv.className = 'quiz-result incorrect';
+            }
+        }
+
+        // دوال الاختبارات الشاملة
+        function submitHTMLQuiz() {
+            const questions = ['htmlFinal1', 'htmlFinal2', 'htmlFinal3', 'htmlFinal4', 'htmlFinal5'];
+            const correctAnswers = [2, 1, 1, 1, 1]; // الإجابات الصحيحة
+            let score = 0;
+            
+            questions.forEach((q, idx) => {
+                const radios = document.getElementsByName(q);
+                let selected = -1;
+                radios.forEach((r, i) => {
+                    if (r.checked) selected = i;
+                });
+                if (selected === correctAnswers[idx]) score++;
+            });
+            
+            const resultDiv = document.getElementById('htmlQuizResult');
+            resultDiv.innerHTML = `<h4>نتيجتك في HTML: ${score}/5 ✨</h4><p>${score >= 4 ? 'ممتاز! أنت تفهم HTML بشكل جيد' : 'حاول مجدداً وادرس أكثر'}</p>`;
+            resultDiv.style.display = 'block';
+        }
+
+        function submitCSSQuiz() {
+            const questions = ['cssFinal1', 'cssFinal2', 'cssFinal3', 'cssFinal4', 'cssFinal5'];
+            const correctAnswers = [1, 1, 1, 1, 1];
+            let score = 0;
+            
+            questions.forEach((q, idx) => {
+                const radios = document.getElementsByName(q);
+                let selected = -1;
+                radios.forEach((r, i) => {
+                    if (r.checked) selected = i;
+                });
+                if (selected === correctAnswers[idx]) score++;
+            });
+            
+            const resultDiv = document.getElementById('cssQuizResult');
+            resultDiv.innerHTML = `<h4>نتيجتك في CSS: ${score}/5 ✨</h4><p>${score >= 4 ? 'ممتاز! تصميمك سيكون جميلاً' : 'مراجعة أكثر ستساعدك'}</p>`;
+            resultDiv.style.display = 'block';
+        }
+
+        function submitJSQuiz() {
+            const questions = ['jsFinal1', 'jsFinal2', 'jsFinal3', 'jsFinal4', 'jsFinal5'];
+            const correctAnswers = [1, 2, 0, 1, 1];
+            let score = 0;
+            
+            questions.forEach((q, idx) => {
+                const radios = document.getElementsByName(q);
+                let selected = -1;
+                radios.forEach((r, i) => {
+                    if (r.checked) selected = i;
+                });
+                if (selected === correctAnswers[idx]) score++;
+            });
+            
+            const resultDiv = document.getElementById('jsQuizResult');
+            resultDiv.innerHTML = `<h4>نتيجتك في JavaScript: ${score}/5 ✨</h4><p>${score >= 4 ? 'رائع! برمجتك قوية جداً' : 'تدرب أكثر على JavaScript'}</p>`;
+            resultDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شرح HTML التفصيلي الكامل</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            direction: rtl;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+        }
+
+        .section h3 {
+            color: #764ba2;
+            font-size: 1.6em;
+            margin: 25px 0 15px;
+            margin-top: 30px;
+        }
+
+        .section p {
+            color: #555;
+            font-size: 1.05em;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.8;
+            border-left: 4px solid #667eea;
+            position: relative;
+            font-size: larger;
+        }
+
+        .code-label {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: #667eea;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.75em;
+        }
+
+        .highlight-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .highlight-list li {
+            background: linear-gradient(135deg, #f5f7ff 0%, #e8ecff 100%);
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 8px;
+            border-right: 4px solid #667eea;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        .highlight-list strong {
+            color: #667eea;
+            font-size: 1.05em;
+        }
+
+        .example-box {
+            background: #f0f7ff;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .example-box h4 {
+            color: #1565c0;
+            margin-bottom: 10px;
+        }
+
+        .example-box p {
+            color: #1565c0;
+        }
+
+        .note {
+            background: #fffde7;
+            border-left: 4px solid #fbc02d;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            color: #f57f17;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: right;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        tr:hover {
+            background: #f0f7ff;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #7f8c8d;
+            transform: translateY(-2px);
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .comparison-box {
+            background: #f5f7ff;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #667eea;
+        }
+
+        .comparison-box h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .comparison-box p {
+            color: #555;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            padding: 30px 20px;
+            font-size: 0.95em;
+            opacity: 0.9;
+        }
+
+        .tree {
+            background: #f5f7ff;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            line-height: 2;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .section {
+                padding: 25px 15px;
+            }
+
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+        .important {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            color: #c62828;
+        }
+
+        .success {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            color: #1b5e20;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>📄 شرح لغة HTML التفصيلي</h1>
+        <p>فهم كامل لـ HTML من الأساس إلى المستوى المتقدم</p>
+    </header>
+
+    <div class="container">
+        <!-- مقدمة عن HTML -->
+        <div class="section">
+            <h2>🎯 ما هي لغة HTML؟</h2>
+            <p>HTML (HyperText Markup Language) هي لغة ترميز تستخدم لإنشاء صفحات الويب. تقوم بتحديد هيكل ومحتوى الصفحة باستخدام الوسوم (Tags).</p>
+            
+            <div class="success">
+                <strong>✅ معلومة مهمة:</strong> HTML ليست لغة برمجة، بل هي لغة ترميز تصف محتوى الصفحة وهيكلتها.
+            </div>
+
+            <h3>الفرق بين HTML و CSS و JavaScript</h3>
+            <div class="comparison">
+                <div class="comparison-box">
+                    <h4>🏗️ HTML</h4>
+                    <p>الهيكل والمحتوى (العظام)</p>
+                </div>
+                <div class="comparison-box">
+                    <h4>🎨 CSS</h4>
+                    <p>التصميم والمظهر (الملابس)</p>
+                </div>
+                <div class="comparison-box">
+                    <h4>⚡ JavaScript</h4>
+                    <p>التفاعل والحركة (المشاعر)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- البنية الأساسية -->
+        <div class="section">
+            <h2>🏗️ البنية الأساسية لصفحة HTML</h2>
+            
+            <p>كل صفحة HTML تحتاج إلى بنية أساسية معينة:</p>
+            
+            <div class="code-block">
+                <span class="code-label">مثال البنية الأساسية</span>
+<code>&lt;!DOCTYPE html&gt;
+&lt;html lang="ar"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width"&gt;
+    &lt;title&gt;Page Title&lt;/title&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Welcome to HTML&lt;/h1&gt;
+    &lt;p&gt;This is page content&lt;/p&gt;
+    &lt;script src="script.js"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code>
+            </div>
+
+            <div class="tree">
+<pre>&lt;!DOCTYPE html&gt;
+│
+└── &lt;html&gt; (جذر الصفحة)
+    │
+    ├── &lt;head&gt; (رأس الصفحة - معلومات)
+    │   ├── &lt;meta charset&gt; (ترميز الأحرف)
+    │   ├── &lt;meta viewport&gt; (التجاوب مع الأجهزة)
+    │   ├── &lt;title&gt; (عنوان الصفحة)
+    │   └── &lt;link&gt;, &lt;style&gt; (تنسيقات)
+    │
+    └── &lt;body&gt; (جسم الصفحة - المحتوى المرئي)
+        ├── &lt;header&gt; (رأس)
+        ├── &lt;main&gt; (المحتوى الرئيسي)
+        ├── &lt;footer&gt; (تذييل)
+        └── &lt;script&gt; (برامج نصية)</pre>
+            </div>
+
+            <ul class="highlight-list">
+                <li><strong>&lt;!DOCTYPE html&gt;</strong> - يخبر المتصفح أن هذا مستند HTML5</li>
+                <li><strong>&lt;html&gt;</strong> - العنصر الجذري الذي يحتوي على كل شيء</li>
+                <li><strong>&lt;head&gt;</strong> - يحتوي على البيانات الوصفية والمراجع</li>
+                <li><strong>&lt;body&gt;</strong> - يحتوي على المحتوى المرئي فقط</li>
+            </ul>
+        </div>
+
+        <!-- الوسوم الأساسية -->
+        <div class="section">
+            <h2>📝 الوسوم الأساسية والمهمة</h2>
+
+            <h3>1️⃣ وسوم العناوين</h3>
+            <p>تُستخدم لإنشاء عناوين بمستويات أهمية مختلفة:</p>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>الوسم</th>
+                            <th>الوصف</th>
+                            <th>مثال الاستخدام</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>&lt;h1&gt;</td>
+                            <td>عنوان رئيسي جداً (الأهم)</td>
+                            <td>&lt;h1&gt;عنوان الموقع&lt;/h1&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;h2&gt;</td>
+                            <td>عنوان فرعي رئيسي</td>
+                            <td>&lt;h2&gt;قسم رئيسي&lt;/h2&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;h3&gt;</td>
+                            <td>عنوان فرعي متوسط</td>
+                            <td>&lt;h3&gt;قسم فرعي&lt;/h3&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;h4&gt;</td>
+                            <td>عنوان فرعي صغير</td>
+                            <td>&lt;h4&gt;عنوان صغير&lt;/h4&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;h5&gt;</td>
+                            <td>عنوان فرعي صغير جداً</td>
+                            <td>&lt;h5&gt;عنوان أصغر&lt;/h5&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;h6&gt;</td>
+                            <td>أصغر عنوان</td>
+                            <td>&lt;h6&gt;أصغر عنوان&lt;/h6&gt;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="example-box">
+                <h4>💡 تلميح مهم:</h4>
+                <p>استخدم h1 واحد فقط في الصفحة للعنوان الرئيسي. استخدم h2, h3 الخ للعناوين الفرعية حسب الهرمية.</p>
+            </div>
+            <div class="code-block">
+                <pre>
+                    <code>
+&lt;h1&gt;عنوان كبير&lt;/h1&gt;
+&lt;h2&gt;اصغر&lt;/h2&gt;
+&lt;h3&gt;اصغر جدا &lt;/h3&gt;
+وهكذا
+                    </code>
+                </pre>
+            </div>
+
+            <h3>2️⃣ وسوم النصوص والفقرات</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>الوسم</th>
+                            <th>الوصف</th>
+                            <th>مثال الاستخدام</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>&lt;p&gt;</td>
+                            <td>فقرة عادية</td>
+                            <td>&lt;p&gt;هذه فقرة عادية&lt;/p&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;strong&gt;</td>
+                            <td>نص غامق وأهم (معنى دلالي)</td>
+                            <td>&lt;strong&gt;نص مهم جداً&lt;/strong&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;b&gt;</td>
+                            <td>نص غامق عادي (مظهر فقط)</td>
+                            <td>&lt;b&gt;نص غامق&lt;/b&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;em&gt;</td>
+                            <td>نص مائل مع تأكيد (معنى دلالي)</td>
+                            <td>&lt;em&gt;نص مؤكد&lt;/em&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;i&gt;</td>
+                            <td>نص مائل عادي (مظهر فقط)</td>
+                            <td>&lt;i&gt;نص مائل&lt;/i&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;mark&gt;</td>
+                            <td>نص مميز وملون (مميز)</td>
+                            <td>&lt;mark&gt;نص مهم&lt;/mark&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;del&gt;</td>
+                            <td>نص مشطوب (محذوف)</td>
+                            <td>&lt;del&gt;نص قديم&lt;/del&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;u&gt;</td>
+                            <td>نص مسطر</td>
+                            <td>&lt;u&gt;نص مسطر&lt;/u&gt;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="code-block">
+                <pre>
+                    <code>
+    &lt;p&gt;هذا نص في فقرة عادية.&lt;/p&gt;
+    &lt;strong&gt;هذا نص مهم جداً.&lt;/strong&gt;
+    &lt;em&gt;هذا نص مؤكد.&lt;/em&gt;
+    &lt;mark&gt;هذا نص مميز.&lt;/mark&gt;
+    &lt;del&gt;هذا نص مشطوب.&lt;/del&gt;
+    &lt;u&gt;هذا نص مسطر.&lt;/u&gt;
+    &lt;b&gt;هذا نص غامق.&lt;/b&gt;
+                    </code>
+                </pre>
+            </div>
+
+            <h3>3️⃣ الروابط والصور</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>الوسم</th>
+                            <th>السمات الرئيسية</th>
+                            <th>مثال الاستخدام</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>&lt;a&gt;</td>
+                            <td>href, target, title</td>
+                            <td>&lt;a href="page.html"&gt;اضغط هنا&lt;/a&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;a&gt; (نافذة جديدة)</td>
+                            <td>target="_blank"</td>
+                            <td>&lt;a href="page.html" target="_blank"&gt;فتح جديد&lt;/a&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;img&gt;</td>
+                            <td>src, alt, width, height</td>
+                            <td>&lt;img src="pic.jpg" alt="صورة"&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;a&gt; مع &lt;img&gt;</td>
+                            <td>دمج الرابط مع صورة</td>
+                            <td>&lt;a href="page.html"&gt;&lt;img src="pic.jpg"&gt;&lt;/a&gt;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="code-block">
+                <pre>
+                    <code>
+&lt;a href="https://example.com" target="_blank" title="go to Example"&gt;click here&lt;/a&gt;
+&lt;img src="image.jpg" alt="describe image" width="300" height="200"&gt;
+&lt;a href="https://example.com"&gt;&lt;img src="logo.png" alt="web logo"&gt;&lt;/a&gt;
+                    </code>
+                </pre>
+            </div>
+
+            <div class="important">
+                <strong>⚠️ نقطة مهمة:</strong> استخدم دائماً سمة alt مع الصور لوصف محتواها. هذا مهم جداً للمستخدمين الضعفاء البصر وللـ SEO.
+            </div>
+        </div>
+
+        <!-- القوائم والجداول -->
+        <div class="section">
+            <h2>📋 القوائم والجداول</h2>
+
+            <h3>القوائم غير المرتبة (Unordered Lists)</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>الوسم</th>
+                            <th>الوصف</th>
+                            <th>مثال الاستخدام</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>&lt;ul&gt;</td>
+                            <td>قائمة غير مرتبة (نقاط بدلاً من الأرقام)</td>
+                            <td>&lt;ul&gt; ... &lt;/ul&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;li&gt;</td>
+                            <td>عنصر في القائمة</td>
+                            <td>&lt;li&gt;العنصر الأول&lt;/li&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>قوائم متداخلة</td>
+                            <td>إضافة ul/ol داخل li</td>
+                            <td>&lt;li&gt;عنصر &lt;ul&gt;...&lt;/ul&gt;&lt;/li&gt;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="code-block">
+                <pre>
+                    <code>
+&lt;ul&gt;
+    &lt;li&gt;العنصر الأول&lt;/li&gt;
+    &lt;li&gt;العنصر الثاني&lt;/li&gt;
+    &lt;li&gt;العنصر الثالث&lt;/li&gt;
+&lt;/ul&gt;
+                    </code>
+                </pre>
+            </div>
+
+            <h3>القوائم المرتبة (Ordered Lists)</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>الوسم</th>
+                            <th>الوصف</th>
+                            <th>مثال الاستخدام</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>&lt;ol&gt;</td>
+                            <td>قائمة مرتبة بأرقام (1, 2, 3...)</td>
+                            <td>&lt;ol&gt; ... &lt;/ol&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;li&gt;</td>
+                            <td>عنصر في القائمة المرتبة</td>
+                            <td>&lt;li&gt;الخطوة الأولى&lt;/li&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;ol type="A"&gt;</td>
+                            <td>قائمة بأحرف كبيرة (A, B, C...)</td>
+                            <td>&lt;ol type="A"&gt; ... &lt;/ol&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;ol type="a"&gt;</td>
+                            <td>قائمة بأحرف صغيرة (a, b, c...)</td>
+                            <td>&lt;ol type="a"&gt; ... &lt;/ol&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;ol type="i"&gt;</td>
+                            <td>قائمة بأرقام رومانية صغيرة</td>
+                            <td>&lt;ol type="i"&gt; ... &lt;/ol&gt;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="code-block">
+                <pre>
+                    <code>
+&lt;ol&gt;
+    &lt;li&gt;الخطوة الأولى&lt;/li&gt;
+    &lt;li&gt;الخطوة الثانية&lt;/li&gt;
+    &lt;li&gt;الخطوة الثالثة&lt;/li&gt;
+&lt;/ol&gt;
+                    </code>
+ الناتج:
+    .الخطوة الأولى
+    .الخطوة الثانية 
+    .الخطوة الثالثة
+                </pre>
+                <pre>
+                    <code>
+&lt;ol type="A"&gt;
+    &lt;li&gt;الخيار الأول&lt;/li&gt;
+    &lt;li&gt;الخيار الثاني&lt;/li&gt;
+&lt;/ol&gt;
+                    </code>
+                الناتج:
+    A. الخيار الأول
+    B. الخيار الثاني
+                </pre>
+            </div>
+
+            <h3>الجداول</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>الوسم</th>
+                            <th>الوصف</th>
+                            <th>مثال الاستخدام</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>&lt;table&gt;</td>
+                            <td>عنصر الجدول الرئيسي</td>
+                            <td>&lt;table&gt; ... &lt;/table&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;thead&gt;</td>
+                            <td>رأس الجدول (صف العناوين)</td>
+                            <td>&lt;thead&gt;&lt;tr&gt;&lt;th&gt;...&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;tbody&gt;</td>
+                            <td>جسم الجدول (البيانات)</td>
+                            <td>&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;...&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;tr&gt;</td>
+                            <td>صف في الجدول</td>
+                            <td>&lt;tr&gt;&lt;td&gt;البيان&lt;/td&gt;&lt;/tr&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;th&gt;</td>
+                            <td>خلية رأس (عنوان العمود)</td>
+                            <td>&lt;th&gt;الاسم&lt;/th&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;td&gt;</td>
+                            <td>خلية بيانات عادية</td>
+                            <td>&lt;td&gt;محمد&lt;/td&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;tfoot&gt;</td>
+                            <td>تذييل الجدول (اختياري)</td>
+                            <td>&lt;tfoot&gt;&lt;tr&gt;&lt;td&gt;...&lt;/td&gt;&lt;/tr&gt;&lt;/tfoot&gt;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="code-block">
+                <pre>
+                    <code>
+&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+        &lt;th&gt;الاسم&lt;/th&gt;
+        &lt;th&gt;العمر&lt;/th&gt;
+        &lt;th&gt;المدينة&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;محمد&lt;/td&gt;
+            &lt;td&gt;25&lt;/td&gt;
+            &lt;td&gt;الرياض&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;فاطمة&lt;/td&gt;
+            &lt;td&gt;30&lt;/td&gt;
+            &lt;td&gt;جدة&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+                    </code>
+الناتج:
+    | الاسم    | العمر | المدينة |
+    |----------|-------|---------|
+    | محمد     | 25    | الرياض  |
+    | فاطمة   | 30    | جدة     |
+                </pre>
+            </div>
+            <h4>ملخص الوسوم المستخدمة في القوائم والجداول</h4>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>الوسم</th>
+                            <th>الوصف</th>
+                            <th>الاستخدام</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>&lt;ul&gt;</td>
+                            <td>قائمة غير مرتبة</td>
+                            <td>قوائم بدون ترتيب محدد</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;ol&gt;</td>
+                            <td>قائمة مرتبة</td>
+                            <td>خطوات متسلسلة</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;table&gt;</td>
+                            <td>جدول</td>
+                            <td>عرض البيانات في صفوف وأعمدة</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;tr&gt;</td>
+                            <td>صف في جدول</td>
+                            <td>كل صف في الجدول</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;td&gt;</td>
+                            <td>خلية في جدول</td>
+                            <td>بيانات الخلية</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- النماذج والإدخال -->
+        <div class="section">
+            <h2>📝 النماذج (Forms) والإدخال</h2>
+
+            <p>النماذج مهمة جداً لتجميع المدخلات من المستخدم. استخدم هذه العناصر لإنشاء نماذج تفاعلية:</p>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>الوسم / الخاصية</th>
+                            <th>الوصف</th>
+                            <th>المثال</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>&lt;form&gt;</td>
+                            <td>عنصر النموذج الرئيسي</td>
+                            <td>&lt;form action="/submit" method="POST"&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;label&gt;</td>
+                            <td>وسم لربط مع حقل الإدخال</td>
+                            <td>&lt;label for="name"&gt;الاسم:&lt;/label&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;input type="text"&gt;</td>
+                            <td>حقل نص عادي</td>
+                            <td>&lt;input type="text" name="username" placeholder="ادخل الاسم"&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;input type="email"&gt;</td>
+                            <td>حقل بريد إلكتروني بتحقق تلقائي</td>
+                            <td>&lt;input type="email" name="email" required&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;input type="password"&gt;</td>
+                            <td>حقل كلمة مرور مخفية</td>
+                            <td>&lt;input type="password" name="pwd" minlength="8"&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;input type="number"&gt;</td>
+                            <td>حقل أرقام فقط</td>
+                            <td>&lt;input type="number" name="age" min="1" max="100"&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;input type="date"&gt;</td>
+                            <td>منتقي التاريخ</td>
+                            <td>&lt;input type="date" name="birthday"&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;input type="time"&gt;</td>
+                            <td>منتقي الوقت</td>
+                            <td>&lt;input type="time" name="appointment"&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;input type="color"&gt;</td>
+                            <td>منتقي الألوان</td>
+                            <td>&lt;input type="color" name="favorite-color"&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;input type="file"&gt;</td>
+                            <td>زر رفع الملفات</td>
+                            <td>&lt;input type="file" name="document" accept=".pdf"&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;input type="checkbox"&gt;</td>
+                            <td>صندوق اختيار متعدد الاختيار</td>
+                            <td>&lt;input type="checkbox" name="agree"&gt; أوافق</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;input type="radio"&gt;</td>
+                            <td>زر اختيار (اختيار واحد فقط)</td>
+                            <td>&lt;input type="radio" name="gender" value="male"&gt; ذكر</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;input type="range"&gt;</td>
+                            <td>شريط التمرير للاختيار</td>
+                            <td>&lt;input type="range" name="volume" min="0" max="100"&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;input type="submit"&gt;</td>
+                            <td>زر الإرسال</td>
+                            <td>&lt;input type="submit" value="إرسال"&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;input type="reset"&gt;</td>
+                            <td>زر تفريغ النموذج</td>
+                            <td>&lt;input type="reset" value="مسح"&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;select&gt;</td>
+                            <td>قائمة منسدلة</td>
+                            <td>&lt;select name="country"&gt;&lt;option value="eg"&gt;مصر&lt;/option&gt;&lt;/select&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;textarea&gt;</td>
+                            <td>مربع نص متعدد الأسطر</td>
+                            <td>&lt;textarea name="message" rows="5" cols="40"&gt;&lt;/textarea&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;fieldset&gt;</td>
+                            <td>مجموعة عناصر النموذج</td>
+                            <td>&lt;fieldset&gt;&lt;legend&gt;بيانات شخصية&lt;/legend&gt;&lt;/fieldset&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;button&gt;</td>
+                            <td>زر عام (إرسال / إعادة / تخصيص)</td>
+                            <td>&lt;button type="submit"&gt;إرسال النموذج&lt;/button&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>placeholder</td>
+                            <td>نص مساعد يظهر بداخل الحقل</td>
+                            <td>placeholder="أدخل بريدك الإلكتروني"</td>
+                        </tr>
+                        <tr>
+                            <td>required</td>
+                            <td>جعل الحقل إجباري التعبئة</td>
+                            <td>&lt;input type="email" required&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>disabled</td>
+                            <td>تعطيل الحقل (لا يمكن تعديله)</td>
+                            <td>&lt;input type="text" disabled&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>readonly</td>
+                            <td>جعل الحقل للقراءة فقط</td>
+                            <td>&lt;input type="text" readonly&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>minlength / maxlength</td>
+                            <td>تحديد طول النص</td>
+                            <td>&lt;input type="text" minlength="3" maxlength="20"&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>min / max</td>
+                            <td>تحديد القيمة الأصغر والأكبر</td>
+                            <td>&lt;input type="number" min="1" max="100"&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>pattern</td>
+                            <td>تحقق من صيغة معينة (regex)</td>
+                            <td>&lt;input type="text" pattern="[0-9]{3}-[0-9]{4}"&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>method</td>
+                            <td>طريقة الإرسال (GET أو POST)</td>
+                            <td>&lt;form method="POST"&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>action</td>
+                            <td>الصفحة التي ستستقبل بيانات النموذج</td>
+                            <td>&lt;form action="/submit.php"&gt;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="code-block">
+            <pre>
+                <code>
+&lt;form action="/submit" method="POST"&gt;
+    &lt;label for="name"&gt;الاسم:&lt;/label&gt;
+    &lt;input type="text" id="name" name="username" placeholder="ادخل الاسم" required&gt;
+    &lt;br&gt;
+    &lt;label for="email"&gt;البريد الإلكتروني:&lt;/label&gt;
+    &lt;input type="email" id="email" name="email" placeholder="ادخل البريد" required&gt;
+    &lt;br&gt;
+    &lt;input type="submit" value="إرسال"&gt;
+&lt;/form&gt;
+                </code>
+                الناتج:
+                <form action="/submit" method="POST">
+    <label for="name">الاسم:</label>
+    <input type="text" id="name" name="username" placeholder="ادخل  الاسم" required>
+    <br>
+    <label for="email">البريد الإلكتروني:</label>
+    <input type="email" id="email" name="email" placeholder="ادخل البريد" required>
+    <br>
+    <input type="submit" value="إرسال">
+</form>
+            </pre>
+        </div>
+
+        <!-- الوسوم الدلالية -->
+        <div class="section">
+            <h2>🏷️ الوسوم الدلالية (Semantic Tags)</h2>
+
+            <p>الوسوم الدلالية توضح معنى المحتوى وتحسن من SEO:</p>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>الوسم</th>
+                            <th>الوصف</th>
+                            <th>الاستخدام</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>&lt;header&gt;</td>
+                            <td>رأس الصفحة</td>
+                            <td>عنوان وقائمة التنقل</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;nav&gt;</td>
+                            <td>التنقل</td>
+                            <td>قوائم الروابط</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;main&gt;</td>
+                            <td>المحتوى الرئيسي</td>
+                            <td>المحتوى الأساسي للصفحة</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;article&gt;</td>
+                            <td>مقالة مستقلة</td>
+                            <td>تدوينات ومقالات</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;section&gt;</td>
+                            <td>قسم</td>
+                            <td>تقسيم المحتوى لأقسام</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;aside&gt;</td>
+                            <td>محتوى جانبي</td>
+                            <td>الشريط الجانبي</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;footer&gt;</td>
+                            <td>تذييل الصفحة</td>
+                            <td>معلومات النهاية</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="code-block">
+            <pre>
+                <code>
+&lt;header&gt;
+    &lt;h1&gt;عنوان الموقع&lt;/h1&gt;
+    &lt;nav&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href="#"&gt;الرئيسية&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;عن الموقع&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;اتصل بنا&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/nav&gt;
+&lt;/header&gt;
+&lt;main&gt;
+    &lt;article&gt;
+        &lt;h2&gt;مقالة اليوم&lt;/h2&gt;
+        &lt;p&gt;هذا هو محتوى المقالة...&lt;/p&gt;
+    &lt;/article&gt;
+&lt;/main&gt;
+&lt;footer&gt;
+    &lt;p&gt;حقوق النشر © 2024&lt;/p&gt;
+&lt;/footer&gt;
+                </code>
+            </pre>
+            
+        </div>
+
+        <!-- الوسائط المتعددة -->
+        <div class="section">
+            <h2>🎬 الوسائط المتعددة (Multimedia)</h2>
+
+            <p>استخدم هذه الوسوم لإدراج الفيديو والصوت والصور المتفاعلة في صفحتك:</p>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>الوسم</th>
+                            <th>الوصف</th>
+                            <th>الاستخدام</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>&lt;img&gt;</td>
+                            <td>إدراج صورة</td>
+                            <td>عرض الصور بتنسيقات PNG, JPG, GIF</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;video&gt;</td>
+                            <td>إدراج فيديو</td>
+                            <td>تشغيل ملفات الفيديو مع controls</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;audio&gt;</td>
+                            <td>إدراج صوت</td>
+                            <td>تشغيل ملفات الموسيقى والصوت</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;source&gt;</td>
+                            <td>مصدر الوسيط</td>
+                            <td>تحديد المسار والصيغة (mp4, webm, mp3)</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;map&gt;</td>
+                            <td>خريطة متفاعلة</td>
+                            <td>تقسيم الصور إلى مناطق قابلة للنقر</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;area&gt;</td>
+                            <td>منطقة في الخريطة</td>
+                            <td>تحديد رابط داخل الخريطة المتفاعلة</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;canvas&gt;</td>
+                            <td>رسم بياني</td>
+                            <td>رسم رسوميات وحركات باستخدام JavaScript</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;svg&gt;</td>
+                            <td>رسوميات متجهة</td>
+                            <td>إنشاء رسوميات قابلة للتحجيم والتفاعل</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="code-block">
+            <pre>
+                <code>
+&lt;!-- إدراج صورة --&gt;
+&lt;img src="image.jpg" alt="describe img" width="600" height="400"&gt;
+&lt;!-- إدراج فيديو --&gt;
+&lt;video width="640" height="360" controls&gt;
+    &lt;source src="video.mp4" type="video/mp4"&gt;
+    &lt;source src="video.webm" type="video/webm"&gt;
+    متصفحك لا يدعم تشغيل الفيديو.
+&lt;/video&gt;
+&lt;!-- إدراج صوت --&gt;
+&lt;audio controls&gt;
+    &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+    متصفحك لا يدعم تشغيل الصوت.
+&lt;/audio&gt;
+                </code>
+            </pre>
+        </div>
+
+        <!-- الخصائص والسمات -->
+        <div class="section">
+            <h2>⚙️ الخصائص والسمات (Attributes)</h2>
+
+            <p>السمات توفر معلومات إضافية عن العناصر:</p>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>السمة</th>
+                            <th>الوصف</th>
+                            <th>مثال الاستخدام</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>id</td>
+                            <td>معرّف فريد للعنصر</td>
+                            <td>&lt;div id="header"&gt;&lt;/div&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>class</td>
+                            <td>فئة للتنسيق (يمكن تكراره)</td>
+                            <td>&lt;p class="text-center"&gt;&lt;/p&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>style</td>
+                            <td>CSS مباشرة على العنصر</td>
+                            <td>&lt;p style="color: blue;"&gt;&lt;/p&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>title</td>
+                            <td>نص يظهر عند التحويم</td>
+                            <td>&lt;img title="صورة"&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>alt</td>
+                            <td>وصف بديل للصور</td>
+                            <td>&lt;img alt="وصف الصورة"&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>data-*</td>
+                            <td>بيانات مخصصة لـ JavaScript</td>
+                            <td>&lt;div data-id="123"&gt;&lt;/div&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>disabled</td>
+                            <td>لتعطيل العنصر</td>
+                            <td>&lt;button disabled&gt;&lt;/button&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>required</td>
+                            <td>لجعل حقل مطلوب</td>
+                            <td>&lt;input required&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>placeholder</td>
+                            <td>نص مساعد في حقل الإدخال</td>
+                            <td>&lt;input placeholder="أدخل اسمك"&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>target</td>
+                            <td>كيفية فتح الرابط</td>
+                            <td>&lt;a target="_blank"&gt;&lt;/a&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>href</td>
+                            <td>عنوان الرابط أو الملف</td>
+                            <td>&lt;a href="page.html"&gt;&lt;/a&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>src</td>
+                            <td>مصدر الصورة أو الفيديو</td>
+                            <td>&lt;img src="image.jpg"&gt;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="code-block">
+            <pre>
+                <code>
+&lt;!-- استخدام السمات --&gt;
+&lt;div id="main-header" class="header"&gt;
+    &lt;h1 title="web title"&gt;my web&lt;/h1&gt;
+&lt;/div&gt;
+&lt;p style="color: green;"&gt;text(Green)&lt;/p&gt;
+&lt;button disabled&gt;click here&lt;/button&gt;
+                </code>
+            </pre>
+        </div>
+
+        <!-- ممارسات أفضل -->
+        <div class="section">
+            <h2>🌟 الممارسات الأفضل في HTML</h2>
+
+            <h3>1. استخدم الهيكل الصحيح</h3>
+            <div class="example-box">
+                <h4>✅ Right:</h4>
+                <p>Use header, main, footer And the semantic hashtags</p>
+            </div>
+
+            <h3>Write clean and well-formatted code</h3>
+            <div class="code-block">
+                
+<code>&lt;!-- ❌Uncoordinated--&gt;
+&lt;div&gt;&lt;p&gt;text&lt;/p&gt;&lt;/div&gt;&lt;div&gt;&lt;p&gt;text&lt;/p&gt;&lt;/div&gt;
+
+&lt;!-- ✅Properly coordinated--&gt;
+&lt;div&gt;
+  &lt;p&gt;text&lt;/p&gt;
+&lt;/div&gt;
+&lt;div&gt;
+  &lt;p&gt;text&lt;/p&gt;
+&lt;/div&gt;</code>
+            </div>
+
+            <h3>3. Use images wisely</h3>
+            <ul class="highlight-list">
+                <li>Always add an alt attribute</li>
+                <li>Use images with appropriate sizes</li>
+                <li>Use modern formats (WebP)</li>
+                <li>Use srcset for responsive images</li>
+            </ul>
+
+            <h3>4.(Accessibility)</h3>
+            <div class="code-block">
+<code>&lt;!-- ❌ bad --&gt;
+&lt;img src="icon.png"&gt;
+&lt;a href="#"&gt;click here&lt;/a&gt;
+
+&lt;!-- ✅ Best --&gt;
+&lt;img src="icon.png" alt="search icon"&gt;
+&lt;a href="/search"&gt;search&lt;/a&gt;</code>
+            </div>
+
+            <h3>5. Performance and fast loading</h3>
+            <ul class="highlight-list">
+                <li>Press images before uploading</li>
+                <li>Use Lazy Loading for images</li>
+                <li>Place scripts at the end of body</li>
+                <li>Use rel="preload" for important resources</li>
+            </ul>
+        </div>
+
+        <!-- خلاصة -->
+        <div class="section">
+            <h2>📌 Summary of the key points</h2>
+
+            <div class="success">
+                <ul class="highlight-list" style="margin: 0;">
+                    <li>HTML is a markup language for structure and content</li>
+                    <li>Every page needs a basic structure</li>
+                    <li>Use semantic tags for better preference</li>
+                    <li>Make your site accessible</li>
+                    <li>Use development tools to test code</li>
+                    <li>Learn from successful website examples</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <a href="index.html" class="btn btn-primary">← العودة للرئيسية</a>
+            <a href="css-detailed.html" class="btn btn-secondary">شرح CSS →</a>
+            <a href="js-detailed.html" class="btn btn-secondary">شرح JavaScript →</a>
+        </div>
+    </div>
+
+    <footer>
+        💻 شرح تفصيلي لـ HTML | جميع الحقوق محفوظة © 2024
+    </footer>
+</body>
+</html>

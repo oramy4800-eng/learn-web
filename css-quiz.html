@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار CSS الشامل</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            direction: rtl;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .question-number {
+            font-size: 12px;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .percentage {
+            font-size: 20px;
+            color: #155724;
+            margin: 10px 0;
+        }
+
+        .quiz-section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .quiz-container {
+            margin-bottom: 25px;
+        }
+
+        .quiz-question {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .quiz-question:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .quiz-question p {
+            margin: 0 0 15px 0;
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 16px;
+        }
+
+        .quiz-question label {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .quiz-question label:hover {
+            background-color: #f5f7fa;
+        }
+
+        .quiz-question input[type="radio"] {
+            margin: 0 10px 0 0;
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+        }
+
+        .back-btn {
+            background: #95a5a6;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background: #7f8c8d;
+            transform: translateY(-2px);
+        }
+
+        .quiz-result-summary {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border: 2px solid #c3e6cb;
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 20px;
+            text-align: center;
+            color: #155724;
+            display: none;
+            animation: slideDown 0.4s ease;
+        }
+
+        .quiz-result-summary.show {
+            display: block !important;
+        }
+
+        .quiz-result-summary h4 {
+            margin: 0 0 10px 0;
+            font-size: 22px;
+            color: #155724;
+        }
+
+        .quiz-result-summary p {
+            margin: 8px 0;
+            font-size: 16px;
+        }
+
+        .score {
+            font-size: 24px;
+            font-weight: bold;
+            color: #155724;
+            margin: 10px 0;
+        }
+
+        .reset-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .reset-btn:hover {
+            background: #0056b3;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .quiz-section {
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 22px;
+            }
+
+            .buttons {
+                gap: 8px;
+            }
+
+            .submit-btn, .back-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 اختبار CSS الشامل</h1>
+            <p>اختبر معلوماتك في CSS - 30 سؤال</p>
+        </header>
+
+        <div class="quiz-section">
+            <div class="quiz-container">
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 1/30</div>
+                    <p>❓ ما هي طرق تطبيق CSS على عنصر HTML؟</p>
+                    <label><input type="radio" name="q1" value="a"> CSS خارجي فقط</label>
+                    <label><input type="radio" name="q1" value="b"> خارجي، داخلي، inline (مدمج)</label>
+                    <label><input type="radio" name="q1" value="c"> CSS داخلي فقط</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 2/30</div>
+                    <p>❓ ما الفرق بين Margin و Padding؟</p>
+                    <label><input type="radio" name="q2" value="a"> لا يوجد فرق</label>
+                    <label><input type="radio" name="q2" value="b"> Margin داخل العنصر و Padding خارجه</label>
+                    <label><input type="radio" name="q2" value="c"> Padding داخل العنصر و Margin خارجه</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 3/30</div>
+                    <p>❓ ما هو Flexbox؟</p>
+                    <label><input type="radio" name="q3" value="a"> نمط قديم للتصميم المتجاوب</label>
+                    <label><input type="radio" name="q3" value="b"> نموذج تخطيط يسهل ترتيب العناصر</label>
+                    <label><input type="radio" name="q3" value="c"> أداة لتحديد الألوان</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 4/30</div>
+                    <p>❓ كيف تحدد حجم الخط في CSS؟</p>
+                    <label><input type="radio" name="q4" value="a"> font-size: 16px;</label>
+                    <label><input type="radio" name="q4" value="b"> text-size: 16px;</label>
+                    <label><input type="radio" name="q4" value="c"> size: 16px;</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 5/30</div>
+                    <p>❓ ما هي وحدة em في CSS؟</p>
+                    <label><input type="radio" name="q5" value="a"> وحدة ثابتة تساوي 1 بكسل</label>
+                    <label><input type="radio" name="q5" value="b"> وحدة نسبية تعتمد على حجم الخط الأب</label>
+                    <label><input type="radio" name="q5" value="c"> وحدة تقاس بالسنتيمتر</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 6/30</div>
+                    <p>❓ ما هو Grid في CSS؟</p>
+                    <label><input type="radio" name="q6" value="a"> نموذج تخطيط ثنائي الأبعاد</label>
+                    <label><input type="radio" name="q6" value="b"> أداة لرسم الخطوط</label>
+                    <label><input type="radio" name="q6" value="c"> نمط للألوان</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 7/30</div>
+                    <p>❓ كيف تستخدم Transitions في CSS؟</p>
+                    <label><input type="radio" name="q7" value="a"> transition: duration;</label>
+                    <label><input type="radio" name="q7" value="b"> transition: property duration timing-function delay;</label>
+                    <label><input type="radio" name="q7" value="c"> transition-time: duration;</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 8/30</div>
+                    <p>❓ ما هي Pseudo-classes؟</p>
+                    <label><input type="radio" name="q8" value="a"> فئات وهمية توصف حالة العنصر</label>
+                    <label><input type="radio" name="q8" value="b"> أنواع من المتغيرات</label>
+                    <label><input type="radio" name="q8" value="c"> عناصر مخفية في CSS</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 9/30</div>
+                    <p>❓ ما هو الفرق بين position: static و position: relative؟</p>
+                    <label><input type="radio" name="q9" value="a"> static افتراضي و relative يسمح بتحريك العنصر</label>
+                    <label><input type="radio" name="q9" value="b"> لا يوجد فرق</label>
+                    <label><input type="radio" name="q9" value="c"> relative افتراضي و static للحركة</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 10/30</div>
+                    <p>❓ كيف تحدد اللون في CSS؟</p>
+                    <label><input type="radio" name="q10" value="a"> color: red; أو color: #FF0000;</label>
+                    <label><input type="radio" name="q10" value="b"> background-color فقط</label>
+                    <label><input type="radio" name="q10" value="c"> fill: red;</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 11/30</div>
+                    <p>❓ ما هو Cascade في CSS؟</p>
+                    <label><input type="radio" name="q11" value="a"> نظام يحدد الأسلوب الأكثر أهمية</label>
+                    <label><input type="radio" name="q11" value="b"> أداة لرسم الصور</label>
+                    <label><input type="radio" name="q11" value="c"> نوع من الحلقات</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 12/30</div>
+                    <p>❓ كيف تجعل عنصر شفاف في CSS؟</p>
+                    <label><input type="radio" name="q12" value="a"> opacity: 0.5;</label>
+                    <label><input type="radio" name="q12" value="b"> transparent: true;</label>
+                    <label><input type="radio" name="q12" value="c"> visibility: hidden;</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 13/30</div>
+                    <p>❓ ما هو z-index في CSS؟</p>
+                    <label><input type="radio" name="q13" value="a"> يحدد ترتيب التراكم للعناصر</label>
+                    <label><input type="radio" name="q13" value="b"> يحدد حجم الخط</label>
+                    <label><input type="radio" name="q13" value="c"> يحدد اللون</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 14/30</div>
+                    <p>❓ كيف تستخدم Media Queries؟</p>
+                    <label><input type="radio" name="q14" value="a"> @media (max-width: 600px) { }</label>
+                    <label><input type="radio" name="q14" value="b"> media-query: 600px;</label>
+                    <label><input type="radio" name="q14" value="c"> respond: 600px;</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 15/30</div>
+                    <p>❓ ما هي CSS Variables؟</p>
+                    <label><input type="radio" name="q15" value="a"> متغيرات تخزن قيماً يمكن إعادة استخدامها</label>
+                    <label><input type="radio" name="q15" value="b"> أدوات لرسم الصور</label>
+                    <label><input type="radio" name="q15" value="c"> نوع من الوسوم</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 16/30</div>
+                    <p>❓ ما هو Box Model في CSS؟</p>
+                    <label><input type="radio" name="q16" value="a"> نموذج يصف كيفية بناء صندوق العنصر</label>
+                    <label><input type="radio" name="q16" value="b"> نوع من التأثيرات</label>
+                    <label><input type="radio" name="q16" value="c"> أداة لإنشاء أشكال</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 17/30</div>
+                    <p>❓ كيف تستخدم !important في CSS؟</p>
+                    <label><input type="radio" name="q17" value="a"> لجعل القاعدة ذات أولوية عالية جداً</label>
+                    <label><input type="radio" name="q17" value="b"> لإضافة تعليق</label>
+                    <label><input type="radio" name="q17" value="c"> لحذف قاعدة</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 18/30</div>
+                    <p>❓ ما هو Transform في CSS؟</p>
+                    <label><input type="radio" name="q18" value="a"> للتحويل والدوران والتمدد للعناصر</label>
+                    <label><input type="radio" name="q18" value="b"> لتغيير اللون فقط</label>
+                    <label><input type="radio" name="q18" value="c"> لإضافة حدود</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 19/30</div>
+                    <p>❓ كيف تضيف ظل لنص في CSS؟</p>
+                    <label><input type="radio" name="q19" value="a"> text-shadow: x y blur color;</label>
+                    <label><input type="radio" name="q19" value="b"> shadow-text: true;</label>
+                    <label><input type="radio" name="q19" value="c"> border-shadow: color;</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 20/30</div>
+                    <p>❓ ما هو Float في CSS؟</p>
+                    <label><input type="radio" name="q20" value="a"> لجعل العنصر يطفو جانباً مع لف النص حوله</label>
+                    <label><input type="radio" name="q20" value="b"> لجعل العنصر شفاف</label>
+                    <label><input type="radio" name="q20" value="c"> لتحديد النوع</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 21/30</div>
+                    <p>❓ كيف تعرّف Border في CSS؟</p>
+                    <label><input type="radio" name="q21" value="a"> border: width style color;</label>
+                    <label><input type="radio" name="q21" value="b"> outline: width;</label>
+                    <label><input type="radio" name="q21" value="c"> frame: style;</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 22/30</div>
+                    <p>❓ ما هو Overflow في CSS؟</p>
+                    <label><input type="radio" name="q22" value="a"> يحدد ما يحدث للمحتوى الزائد عن الحد</label>
+                    <label><input type="radio" name="q22" value="b"> يحدد اللون</label>
+                    <label><input type="radio" name="q22" value="c"> يحدد حجم الخط</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 23/30</div>
+                    <p>❓ كيف تستخدم Gradients في CSS؟</p>
+                    <label><input type="radio" name="q23" value="a"> background: linear-gradient(direction, color-stop1, color-stop2);</label>
+                    <label><input type="radio" name="q23" value="b"> gradient: colors;</label>
+                    <label><input type="radio" name="q23" value="c"> fill-gradient: true;</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 24/30</div>
+                    <p>❓ ما هو Display في CSS؟</p>
+                    <label><input type="radio" name="q24" value="a"> يحدد كيفية عرض العنصر (block, inline, grid, flex)</label>
+                    <label><input type="radio" name="q24" value="b"> يحدد الألوان</label>
+                    <label><input type="radio" name="q24" value="c"> يحدد الحدود</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 25/30</div>
+                    <p>❓ كيف تستخدم Text-align في CSS؟</p>
+                    <label><input type="radio" name="q25" value="a"> text-align: left/right/center/justify;</label>
+                    <label><input type="radio" name="q25" value="b"> align-text: center;</label>
+                    <label><input type="radio" name="q25" value="c"> position-text: middle;</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 26/30</div>
+                    <p>❓ ما هو Line-height في CSS؟</p>
+                    <label><input type="radio" name="q26" value="a"> يحدد المسافة بين الأسطر في النص</label>
+                    <label><input type="radio" name="q26" value="b"> يحدد سمك الخط</label>
+                    <label><input type="radio" name="q26" value="c"> يحدد لون الخط</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 27/30</div>
+                    <p>❓ كيف تستخدم Font-weight في CSS؟</p>
+                    <label><input type="radio" name="q27" value="a"> font-weight: normal/bold/100-900;</label>
+                    <label><input type="radio" name="q27" value="b"> text-weight: heavy;</label>
+                    <label><input type="radio" name="q27" value="c"> weight: bold;</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 28/30</div>
+                    <p>❓ ما هو Border-radius في CSS؟</p>
+                    <label><input type="radio" name="q28" value="a"> لجعل زوايا العنصر مستديرة</label>
+                    <label><input type="radio" name="q28" value="b"> لإضافة حد</label>
+                    <label><input type="radio" name="q28" value="c"> لتحديد اللون</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 29/30</div>
+                    <p>❓ كيف تستخدم Width و Height في CSS؟</p>
+                    <label><input type="radio" name="q29" value="a"> width: value; height: value;</label>
+                    <label><input type="radio" name="q29" value="b"> size: width height;</label>
+                    <label><input type="radio" name="q29" value="c"> dimension: w h;</label>
+                </div>
+
+                <div class="quiz-question">
+                    <div class="question-number">السؤال 30/30</div>
+                    <p>❓ ما هي Specificity في CSS؟</p>
+                    <label><input type="radio" name="q30" value="a"> مستوى تحديد أي CSS يجب تطبيقه</label>
+                    <label><input type="radio" name="q30" value="b"> نوع من الحلقات</label>
+                    <label><input type="radio" name="q30" value="c"> أداة لرسم الصور</label>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button class="submit-btn" onclick="submitQuiz()">📊 عرض النتيجة</button>
+                <a href="index.html" class="back-btn">← العودة للرئيسية</a>
+            </div>
+
+            <div id="quizResult" class="quiz-result-summary">
+                <h4>🎉 نتيجتك</h4>
+                <p id="resultText"></p>
+                <div class="score" id="scoreDisplay"></div>
+                <div class="percentage" id="percentageDisplay"></div>
+                <p id="feedbackText"></p>
+                <button class="reset-btn" onclick="resetQuiz()">إعادة الاختبار</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            q1: 'b', q2: 'c', q3: 'b', q4: 'a', q5: 'b',
+            q6: 'a', q7: 'b', q8: 'a', q9: 'a', q10: 'a',
+            q11: 'a', q12: 'a', q13: 'a', q14: 'a', q15: 'a',
+            q16: 'a', q17: 'a', q18: 'a', q19: 'a', q20: 'a',
+            q21: 'a', q22: 'a', q23: 'a', q24: 'a', q25: 'a',
+            q26: 'a', q27: 'a', q28: 'a', q29: 'a', q30: 'a'
+        };
+
+        function submitQuiz() {
+            let score = 0;
+            let answered = 0;
+            
+            for (let i = 1; i <= 30; i++) {
+                const name = `q${i}`;
+                const radios = document.getElementsByName(name);
+                let selected = null;
+                
+                radios.forEach((r) => {
+                    if (r.checked) {
+                        selected = r.value;
+                        answered++;
+                    }
+                });
+                
+                if (selected === correctAnswers[name]) score++;
+            }
+
+            const resultDiv = document.getElementById('quizResult');
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            const percentageDisplay = document.getElementById('percentageDisplay');
+            const feedbackText = document.getElementById('feedbackText');
+            const resultText = document.getElementById('resultText');
+
+            if (answered < 30) {
+                resultText.textContent = `⚠️ يرجى الإجابة على جميع الأسئلة (أجبت على ${answered} من 30)`;
+                resultDiv.classList.add('show');
+                resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+
+            const percentage = Math.round((score / 30) * 100);
+            scoreDisplay.textContent = `${score} / 30 ✨`;
+            percentageDisplay.textContent = `النسبة: ${percentage}%`;
+            
+            if (percentage >= 90) {
+                feedbackText.textContent = '🏆 ممتاز جداً! أنت متخصص في CSS';
+                resultDiv.style.background = 'linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%)';
+                resultDiv.style.borderColor = '#c3e6cb';
+            } else if (percentage >= 75) {
+                feedbackText.textContent = '🎯 ممتاز! تصميمك سيكون جميلاً جداً';
+                resultDiv.style.background = 'linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%)';
+                resultDiv.style.borderColor = '#c3e6cb';
+            } else if (percentage >= 60) {
+                feedbackText.textContent = '👍 جيد! لكن تدرب أكثر على CSS';
+                resultDiv.style.background = 'linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%)';
+                resultDiv.style.borderColor = '#ffeaa7';
+            } else {
+                feedbackText.textContent = '📚 تحتاج لمراجعة أكثر، حاول مجدداً';
+                resultDiv.style.background = 'linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%)';
+                resultDiv.style.borderColor = '#f5c6cb';
+            }
+
+            resultDiv.classList.add('show');
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function resetQuiz() {
+            document.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.checked = false;
+            });
+            document.getElementById('quizResult').classList.remove('show');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

@@ -596,6 +596,63 @@ button:hover {
     border: 1px solid #ffeaa7;
 }
 
+/* ═══════════════════════════════════════════════════════════════ */
+/* تنسيق أقسام الفيديو (Video Sections) */
+/* ═══════════════════════════════════════════════════════════════ */
+.video {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+    padding: 25px;
+    margin: 25px 0;
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+.video a {
+    background: white;
+    color: #667eea;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1em;
+    border: 2px solid white;
+    transition: all 0.3s ease;
+    display: inline-block;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.video a:hover {
+    background: transparent;
+    color: white;
+    border-color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.video a:active {
+    transform: translateY(-1px);
+}
+
+/* استجابة الفيديو على الأجهزة الصغيرة */
+@media (max-width: 768px) {
+    .video {
+        padding: 20px;
+        margin: 20px 0;
+        flex-direction: column;
+    }
+    
+    .video a {
+        width: 100%;
+        padding: 15px 20px;
+    }
+}
+
 /* أنماط الاختبارات الشاملة */
 .comprehensive-quiz {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -604,6 +661,139 @@ button:hover {
     margin: 30px 0;
     color: white;
     box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* تنسيق محتوى الصفحة الرئيسية (Main Content)  */
+/* ═══════════════════════════════════════════════════════════════ */
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.intro-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 15px;
+    padding: 40px;
+    margin-bottom: 50px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    animation: slideIn 0.6s ease;
+}
+
+.section-icon {
+    font-size: 3em;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.intro-section h2 {
+    font-size: 2.2em;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.intro-section p {
+    font-size: 1.1em;
+    line-height: 1.8;
+    opacity: 0.95;
+}
+
+/* شبكة البطاقات */
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+/* بطاقات المعلومات */
+.info-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border-left: 5px solid #667eea;
+    text-align: center;
+}
+
+.info-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
+    border-left-color: #764ba2;
+}
+
+.card-icon {
+    font-size: 3.5em;
+    margin-bottom: 20px;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.info-card:hover .card-icon {
+    transform: scale(1.1);
+}
+
+.info-card h2 {
+    color: #667eea;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.info-card p {
+    color: #666;
+    font-size: 1em;
+    line-height: 1.7;
+    text-align: right;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* الاستجابة على الأجهزة الصغيرة */
+@media (max-width: 768px) {
+    .intro-section {
+        padding: 30px 20px;
+        margin-bottom: 30px;
+    }
+    
+    .intro-section h2 {
+        font-size: 1.6em;
+    }
+    
+    .intro-section p {
+        font-size: 1em;
+    }
+    
+    .cards-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .info-card {
+        padding: 25px 20px;
+    }
+    
+    .card-icon {
+        font-size: 2.5em;
+    }
+    
+    .info-card h2 {
+        font-size: 1.4em;
+    }
 }
 
 .comprehensive-quiz h3 {

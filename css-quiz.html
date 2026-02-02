@@ -5,6 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>اختبار CSS الشامل</title>
     <style>
+        /* زر العودة للأعلى */
+        #scrollToTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 50px;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #scrollToTopBtn.show {
+            display: flex;
+        }
+
+        #scrollToTopBtn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        #scrollToTopBtn:active {
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            #scrollToTopBtn {
+                bottom: 20px;
+                left: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+        }
         * {
             margin: 0;
             padding: 0;
@@ -55,9 +100,16 @@
 
         .quiz-section {
             background: white;
-            border-radius: 10px;
+            border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2), 0 15px 40px rgba(118, 75, 162, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(102, 126, 234, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .quiz-section:hover {
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3), 0 25px 60px rgba(118, 75, 162, 0.2);
         }
 
         .quiz-container {
@@ -117,16 +169,35 @@
             color: white;
             border: none;
             padding: 12px 30px;
-            border-radius: 5px;
+            border-radius: 20px;
             cursor: pointer;
             font-size: 16px;
             font-weight: bold;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 100%);
+            transition: left 0.5s ease;
+            z-index: -1;
         }
 
         .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.5);
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
         }
 
         .back-btn {
@@ -134,18 +205,38 @@
             color: white;
             border: none;
             padding: 12px 30px;
-            border-radius: 5px;
+            border-radius: 20px;
             cursor: pointer;
             font-size: 16px;
             font-weight: bold;
             text-decoration: none;
             display: inline-block;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
+            transition: left 0.5s ease;
+            z-index: -1;
         }
 
         .back-btn:hover {
             background: #7f8c8d;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-btn:hover::before {
+            left: 100%;
         }
 
         .quiz-result-summary {
@@ -183,19 +274,74 @@
         }
 
         .reset-btn {
-            background: #007bff;
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
             color: white;
             border: none;
             padding: 10px 25px;
-            border-radius: 5px;
+            border-radius: 20px;
             cursor: pointer;
             font-size: 14px;
             margin-top: 15px;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+        }
+
+        .reset-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 100%);
+            transition: left 0.5s ease;
+            z-index: -1;
         }
 
         .reset-btn:hover {
-            background: #0056b3;
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
+        }
+
+        .reset-btn:hover::before {
+            left: 100%;
+        }
+
+        /* تنسيق الإجابات الصحيحة والخاطئة */
+        .quiz-question.correct {
+            background-color: #f0f8f0;
+            border-left: 4px solid #28a745;
+            padding-left: 20px;
+        }
+
+        .quiz-question.incorrect {
+            background-color: #fff5f5;
+            border-left: 4px solid #dc3545;
+            padding-left: 20px;
+        }
+
+        .correct-answer-msg {
+            background-color: #d4edda;
+            border: 1px solid #28a745;
+            padding: 10px 15px;
+            border-radius: 5px;
+            color: #155724;
+            margin-top: 10px;
+            font-size: 0.95em;
+            text-align: right;
+        }
+
+        .wrong-answer-msg {
+            background-color: #f8d7da;
+            border: 1px solid #dc3545;
+            padding: 10px 15px;
+            border-radius: 5px;
+            color: #721c24;
+            margin-top: 10px;
+            font-size: 0.95em;
+            text-align: right;
         }
 
         @keyframes slideDown {
@@ -227,13 +373,51 @@
                 font-size: 14px;
             }
         }
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #7f8c8d;
+            transform: translateY(-2px);
+        }
+        
     </style>
 </head>
 <body>
     <div class="container">
+        
         <header>
             <h1>🎨 اختبار CSS الشامل</h1>
             <p>اختبر معلوماتك في CSS - 30 سؤال</p>
+            <div class="button-group">
+            <a href="index.html" class="btn btn-primary">← العودة للرئيسية</a>
+            <a href="css-detailed.html" class="btn btn-secondary">شرح CSS →</a>
+            <a href="js-detailed.html" class="btn btn-secondary">شرح JavaScript →</a>
+        </div>
         </header>
 
         <div class="quiz-section">
@@ -511,6 +695,7 @@
             
             for (let i = 1; i <= 30; i++) {
                 const name = `q${i}`;
+                const quizQuestion = document.querySelector(`.quiz-question:has(input[name="${name}"])`);
                 const radios = document.getElementsByName(name);
                 let selected = null;
                 
@@ -521,7 +706,33 @@
                     }
                 });
                 
-                if (selected === correctAnswers[name]) score++;
+                // تطبيق التمييز البصري
+                if (quizQuestion) {
+                    quizQuestion.classList.remove('correct', 'incorrect');
+                    
+                    if (selected === correctAnswers[name]) {
+                        score++;
+                        quizQuestion.classList.add('correct');
+                        
+                        // إضافة رسالة الإجابة الصحيحة
+                        if (!quizQuestion.querySelector('.correct-answer-msg')) {
+                            const msg = document.createElement('div');
+                            msg.className = 'correct-answer-msg';
+                            msg.textContent = '✅ إجابة صحيحة!';
+                            quizQuestion.appendChild(msg);
+                        }
+                    } else if (selected) {
+                        quizQuestion.classList.add('incorrect');
+                        
+                        // إضافة رسالة الإجابة الخاطئة والصحيحة
+                        if (!quizQuestion.querySelector('.wrong-answer-msg')) {
+                            const msg = document.createElement('div');
+                            msg.className = 'wrong-answer-msg';
+                            msg.innerHTML = `❌ إجابتك: <strong>${selected}</strong><br>الإجابة الصحيحة: <strong>${correctAnswers[name]}</strong>`;
+                            quizQuestion.appendChild(msg);
+                        }
+                    }
+                }
             }
 
             const resultDiv = document.getElementById('quizResult');
@@ -567,9 +778,41 @@
             document.querySelectorAll('input[type="radio"]').forEach(radio => {
                 radio.checked = false;
             });
+            
+            // إزالة التمييز والرسائل
+            document.querySelectorAll('.quiz-question').forEach(q => {
+                q.classList.remove('correct', 'incorrect');
+                const msg = q.querySelector('.correct-answer-msg, .wrong-answer-msg');
+                if (msg) msg.remove();
+            });
+            
             document.getElementById('quizResult').classList.remove('show');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
 </body>
 </html>
+
+<button id="scrollToTopBtn" title="العودة للأعلى">⬆</button>
+
+    <script>
+        // زر العودة للأعلى
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+        // إظهار/إخفاء الزر حسب التمرير
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        // العودة للأعلى عند الضغط على الزر
+        scrollToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>

@@ -300,17 +300,151 @@
             border-radius: 8px;
             color: #1b5e20;
         }
+
+        .nav-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-items-visible {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-items-hidden {
+            display: none;
+            gap: 15px;
+            flex-wrap: wrap;
+            flex-basis: 100%;
+            justify-content: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .nav-items-hidden.active {
+            display: flex;
+        }
+
+        .nav-toggle {
+            margin-top: 15px;
+            flex-basis: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 10px 20px;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .nav-toggle.active::before {
+            content: "▲ ";
+        }
+
+        .nav-toggle:not(.active)::before {
+            content: "▼ ";
+        }
+
+        @media (max-width: 768px) {
+            .nav-items-visible {
+                flex-basis: 100%;
+            }
+
+            .nav-items-hidden {
+                flex-basis: 100%;
+            }
+        }
+
+        /* زر العودة للأعلى */
+        #scrollToTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 50px;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #scrollToTopBtn.show {
+            display: flex;
+        }
+
+        #scrollToTopBtn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        #scrollToTopBtn:active {
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            #scrollToTopBtn {
+                bottom: 20px;
+                left: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+        }
+        
     </style>
 </head>
 <body>
     <header>
         <h1>📄 شرح لغة HTML التفصيلي</h1>
         <p>فهم كامل لـ HTML من الأساس إلى المستوى المتقدم</p>
+        <div class="button-group">
+            <a href="index.html" class="btn btn-primary">← العودة للرئيسية</a>
+            <a href="js-detailed.html" class="btn btn-secondary">شرح JavaScript →</a>
+            <a href="css-detailed.html" class="btn btn-secondary">شرح CSS ←</a>
+        </div>
+        <div class="video btn btn-primary">
+            <a href="https://www.bing.com/videos/riverview/relatedvideo?q=%d8%b4%d8%b1%d8%ad+html+%d9%81%d9%8a+%d9%81%d9%8a%d8%af%d9%8a%d9%88+%d9%88%d8%a7%d8%ad%d8%af&mid=930775BE5CB13A9C8D7C930775BE5CB13A9C8D7C&FORM=VIRE" target="_blank">الكورس كامل (فيديو) click here</a>
+        </div>
     </header>
 
     <div class="container">
+        <nav>
+            <div class="button-group nav-container">
+                <div class="nav-items-visible">
+                    <a href="#what-is-html" class="btn btn-primary">ما هي HTML؟</a>
+                    <a href="#html-structure" class="btn btn-primary">بنية HTML</a>
+                    <a href="#essential-tags" class="btn btn-primary">الوسوم الأساسية</a>
+                </div>
+                <div class="nav-items-hidden" id="moreItems">
+                    <a href="#text-paragraphs" class="btn btn-primary">النصوص والفقرات</a>
+                    <a href="#links-images" class="btn btn-primary">الروابط والصور</a>
+                    <a href="#ordered-list" class="btn btn-primary">القوائم المرتبة</a>
+                    <a href="#lists-tables" class="btn btn-primary">الجداول</a>
+                    <a href="#forms-inputs" class="btn btn-primary">النماذج والإدخال</a>
+                    <a href="#semantic-tags" class="btn btn-primary">الوسوم الدلالية</a>
+                    <a href="#multimedia-tags" class="btn btn-primary">الوسائط المتعددة</a>
+                    <a href="#attributes" class="btn btn-primary">الخصائص والسمات</a>
+                    <a href="#best-practices" class="btn btn-primary">الممارسات الأفضل في HTML</a>
+                </div>
+                <button class="btn btn-primary nav-toggle" id="toggleBtn" title="إظهار المزيد">
+                    ▼ المزيد
+                </button>
+            </div>
+        </nav>
         <!-- مقدمة عن HTML -->
-        <div class="section">
+        <div class="section" id="what-is-html">
             <h2>🎯 ما هي لغة HTML؟</h2>
             <p>HTML (HyperText Markup Language) هي لغة ترميز تستخدم لإنشاء صفحات الويب. تقوم بتحديد هيكل ومحتوى الصفحة باستخدام الوسوم (Tags).</p>
             
@@ -336,7 +470,7 @@
         </div>
 
         <!-- البنية الأساسية -->
-        <div class="section">
+        <div class="section" id="html-structure">
             <h2>🏗️ البنية الأساسية لصفحة HTML</h2>
             
             <p>كل صفحة HTML تحتاج إلى بنية أساسية معينة:</p>
@@ -386,7 +520,7 @@
         </div>
 
         <!-- الوسوم الأساسية -->
-        <div class="section">
+        <div class="section" id="essential-tags">
             <h2>📝 الوسوم الأساسية والمهمة</h2>
 
             <h3>1️⃣ وسوم العناوين</h3>
@@ -452,7 +586,7 @@
             </div>
 
             <h3>2️⃣ وسوم النصوص والفقرات</h3>
-            <div class="table-responsive">
+            <div class="table-responsive" id="text-paragraphs">
                 <table>
                     <thead>
                         <tr>
@@ -520,7 +654,7 @@
             </div>
 
             <h3>3️⃣ الروابط والصور</h3>
-            <div class="table-responsive">
+            <div class="table-responsive" id="links-images">
                 <table>
                     <thead>
                         <tr>
@@ -569,7 +703,7 @@
         </div>
 
         <!-- القوائم والجداول -->
-        <div class="section">
+        <div class="section" id="lists-tables">
             <h2>📋 القوائم والجداول</h2>
 
             <h3>القوائم غير المرتبة (Unordered Lists)</h3>
@@ -615,7 +749,7 @@
             </div>
 
             <h3>القوائم المرتبة (Ordered Lists)</h3>
-            <div class="table-responsive">
+            <div class="table-responsive" id="ordered-list">
                 <table>
                     <thead>
                         <tr>
@@ -681,7 +815,7 @@
             </div>
 
             <h3>الجداول</h3>
-            <div class="table-responsive">
+            <div class="table-responsive" id="lists-tables">
                 <table>
                     <thead>
                         <tr>
@@ -762,7 +896,7 @@
                 </pre>
             </div>
             <h4>ملخص الوسوم المستخدمة في القوائم والجداول</h4>
-            <div class="table-responsive">
+            <div class="table-responsive" id="ordered-list">
                 <table>
                     <thead>
                         <tr>
@@ -808,7 +942,7 @@
 
             <p>النماذج مهمة جداً لتجميع المدخلات من المستخدم. استخدم هذه العناصر لإنشاء نماذج تفاعلية:</p>
 
-            <div class="table-responsive">
+            <div class="table-responsive" id="forms-inputs">
                 <table>
                     <thead>
                         <tr>
@@ -989,7 +1123,7 @@
         </div>
 
         <!-- الوسوم الدلالية -->
-        <div class="section">
+        <div class="section" id="semantic-tags">
             <h2>🏷️ الوسوم الدلالية (Semantic Tags)</h2>
 
             <p>الوسوم الدلالية توضح معنى المحتوى وتحسن من SEO:</p>
@@ -1076,7 +1210,7 @@
 
             <p>استخدم هذه الوسوم لإدراج الفيديو والصوت والصور المتفاعلة في صفحتك:</p>
 
-            <div class="table-responsive">
+            <div class="table-responsive" id="multimedia-tags">
                 <table>
                     <thead>
                         <tr>
@@ -1151,7 +1285,7 @@
         </div>
 
         <!-- الخصائص والسمات -->
-        <div class="section">
+        <div class="section" id="attributes">
             <h2>⚙️ الخصائص والسمات (Attributes)</h2>
 
             <p>السمات توفر معلومات إضافية عن العناصر:</p>
@@ -1244,7 +1378,7 @@
         </div>
 
         <!-- ممارسات أفضل -->
-        <div class="section">
+        <div class="section" id="best-practices">
             <h2>🌟 الممارسات الأفضل في HTML</h2>
 
             <h3>1. استخدم الهيكل الصحيح</h3>
@@ -1322,5 +1456,49 @@
     <footer>
         💻 شرح تفصيلي لـ HTML | جميع الحقوق محفوظة © 2024
     </footer>
+
+    <script>
+        // التحكم في قائمة التنقل المتوسعة
+        const toggleBtn = document.getElementById('toggleBtn');
+        const moreItems = document.getElementById('moreItems');
+
+        toggleBtn.addEventListener('click', function() {
+            moreItems.classList.toggle('active');
+            toggleBtn.classList.toggle('active');
+        });
+
+        // إغلاق القائمة عند النقر على أحد الروابط
+        const navLinks = moreItems.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                moreItems.classList.remove('active');
+                toggleBtn.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
+
+    <button id="scrollToTopBtn" title="العودة للأعلى">⬆</button>
+
+    <script>
+        // زر العودة للأعلى
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+        // إظهار/إخفاء الزر حسب التمرير
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        // العودة للأعلى عند الضغط على الزر
+        scrollToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>

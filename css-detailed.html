@@ -279,6 +279,52 @@
             color: #1b5e20;
         }
 
+        /* زر العودة للأعلى */
+        #scrollToTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 50px;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #scrollToTopBtn.show {
+            display: flex;
+        }
+
+        #scrollToTopBtn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        #scrollToTopBtn:active {
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            #scrollToTopBtn {
+                bottom: 20px;
+                left: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+        }
+
         @media (max-width: 768px) {
             header h1 {
                 font-size: 1.8em;
@@ -300,17 +346,122 @@
                 width: 100%;
             }
         }
+        .nav-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-items-visible {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-items-hidden {
+            display: none;
+            gap: 15px;
+            flex-wrap: wrap;
+            flex-basis: 100%;
+            justify-content: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .nav-items-hidden.active {
+            display: flex;
+        }
+
+        .nav-toggle {
+            margin-top: 15px;
+            flex-basis: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 10px 20px;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .nav-toggle.active::before {
+            content: "▲ ";
+        }
+
+        .nav-toggle:not(.active)::before {
+            content: "▼ ";
+        }
+
+        @media (max-width: 768px) {
+            .nav-items-visible {
+                flex-basis: 100%;
+            }
+
+            .nav-items-hidden {
+                flex-basis: 100%;
+            }
+        }
     </style>
 </head>
 <body>
     <header>
         <h1>🎨 شرح لغة CSS التفصيلي</h1>
         <p>إتقان تصميم وتجميل صفحات الويب بكل احترافية</p>
+        <div class="button-group">
+            <a href="index.html" class="btn btn-primary">← العودة للرئيسية</a>
+            <a href="html-detailed.html" class="btn btn-secondary">شرح HTML ←</a>
+            <a href="js-detailed.html" class="btn btn-secondary">شرح JavaScript →</a>
+        </div>
+        <div class="video btn btn-primary">
+            <a href="https://www.bing.com/videos/riverview/relatedvideo?q=%d8%b4%d8%b1%d8%ad+css%d9%81%d9%8a+%d9%81%d9%8a%d8%af%d9%8a%d9%88+%d9%88%d8%a7%d8%ad%d8%af&&mid=EAE4CE6C3F942031793DEAE4CE6C3F942031793D&FORM=VAMGZC" target="_blank">الكورس كامل (فيديو) click here</a>
+        </div>
     </header>
-
+    
     <div class="container">
+        
+        <nav>
+            <div class="button-group nav-container">
+                <a href="#what-is-css" class="btn btn-primary">ما هي لغة CSS؟</a>
+                <a href="#selectors" class="btn btn-primary">المحددات (Selectors)</a>
+                <a href="#colors-fonts" class="btn btn-primary">الألوان والخطوط والنصوص</a>
+                <a href="#box-model" class="btn btn-primary">نموذج الصندوق (Box Model)</a>
+                <a href="#layout-position" class="btn btn-primary">التخطيط والمواضع (Layout & Position)</a>
+            </div>
+            <div>
+                <div class="button-group nav-container nav-items-hidden" id="moreItems">
+                    <a href="#flexbox" class="btn btn-primary">Flexbox</a>
+                    <a href="#grid" class="btn btn-primary">CSS Grid</a>
+                    <a href="#transitions" class="btn btn-primary">التحولات</a>
+                    <a href="#animations" class="btn btn-primary">الرسوم المتحركة</a>
+                    <a href="#responsive-design" class="btn btn-primary">التصميم المتجاوب</a>
+                    <a href="#best-practices" class="btn btn-primary">الممارسات الأفضل في CSS</a>
+                </div>
+                <button class="btn btn-primary nav-toggle" id="toggleBtn" title="إظهار المزيد">
+                    ▼ المزيد
+                </button>
+                <script>
+        // التحكم في قائمة التنقل المتوسعة
+        const toggleBtn = document.getElementById('toggleBtn');
+        const moreItems = document.getElementById('moreItems');
+
+        toggleBtn.addEventListener('click', function() {
+            moreItems.classList.toggle('active');
+            toggleBtn.classList.toggle('active');
+        });
+
+        // إغلاق القائمة عند النقر على أحد الروابط
+        const navLinks = moreItems.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                moreItems.classList.remove('active');
+                toggleBtn.classList.remove('active');
+            });
+        });
+    </script>
+            </div>
+        </nav>
         <!-- مقدمة عن CSS -->
-        <div class="section">
+        <div class="section" id="what-is-css">
             <div style="direction: rtl;">
                 <h2>🎯 ما هي لغة CSS؟</h2>
             <p>CSS (Cascading Style Sheets) هي لغة تنسيق تُستخدم لتصميم وتجميل عناصر HTML. بينما HTML يحدد الهيكل، CSS يحدد المظهر واللون والموضع.</p>
@@ -354,7 +505,7 @@
         </div>
 
         <!-- المحددات -->
-        <div class="section">
+        <div class="section" id="selectors">
             <h2>🎯 المحددات (Selectors)</h2>
 
             <p>المحددات تحدد العناصر التي ستُطبق عليها القواعد:</p>
@@ -434,8 +585,8 @@
                 </pre>
             </div>
 
-            <h3>محددات الحالة (Pseudo-classes)</h3>
-            <div class="table-responsive">
+            <h3 id="selectors-2">محددات الحالة (Pseudo-classes)</h3>
+            <div class="table-responsive" >
                 <table>
                     <thead>
                         <tr>
@@ -514,7 +665,7 @@
             </div>
 
             <h3>أولوية المحددات (Specificity)</h3>
-            <div class="table-responsive">
+            <div class="table-responsive" id="selector">
                 <table>
                     <thead>
                         <tr>
@@ -554,7 +705,7 @@
         </div>
 
         <!-- الألوان والخطوط -->
-        <div class="section">
+        <div class="section" id="colors-fonts">
             <h2>🌈 الألوان والخطوط والنصوص</h2>
 
             <h3>الألوان - طرق مختلفة</h3>
@@ -627,7 +778,7 @@
                     </pre>
                 </div>
             </div>
-            <h3>الخطوط والنصوص</h3>
+            <h3 id="fonts-text">الخطوط والنصوص</h3>
             <div class="table-responsive">
                 <table>
                     <thead>
@@ -718,7 +869,7 @@
         </div>
 
         <!-- نموذج الصندوق -->
-        <div class="section">
+        <div class="section" id="box-model">
             <h2>📦 نموذج الصندوق (Box Model)</h2>
 
             <p>كل عنصر HTML مثل صندوق له أربع طبقات:</p>
@@ -799,7 +950,7 @@
         </div>
 
         <!-- التخطيط والمواضع -->
-        <div class="section">
+        <div class="section" id="layout-position">
             <h2>📐 التخطيط والمواضع (Layout & Position)</h2>
 
             <h3>1. Display - كيفية عرض العنصر</h3>
@@ -858,9 +1009,9 @@
                 </pre>
             </div>
 
-            <h3>2. Flexbox - التخطيط المرن</h3>
+            <h3 id="flexbox">2. Flexbox - التخطيط المرن</h3>
             
-            <h4>اتجاه العناصر (flex-direction)</h4>
+            <h4 id="flex-direction">اتجاه العناصر (flex-direction)</h4>
             <div class="table-responsive">
                 <table>
                     <thead>
@@ -906,7 +1057,7 @@
         }
                 </pre>
                 </div>
-            <h4>محاذاة أفقية (justify-content)</h4>
+            <h4 id="justify-content">محاذاة أفقية (justify-content)</h4>
             <div class="table-responsive">
                 <table>
                     <thead>
@@ -967,7 +1118,7 @@
 
             </div>
 
-            <h4>محاذاة عمودية (align-items)</h4>
+            <h4 id="align-items">محاذاة عمودية (align-items)</h4>
             <div class="table-responsive">
                 <table>
                     <thead>
@@ -1016,7 +1167,7 @@
                 </pre>
             </div>
 
-            <h4>خصائص العناصر (flex-item properties)</h4>
+            <h4 id="flex-item-properties">خصائص العناصر (flex-item properties)</h4>
             <div class="table-responsive">
                 <table>
                     <thead>
@@ -1075,7 +1226,7 @@
             </div>
 
 
-            <h3>3. Grid - التخطيط الشبكي</h3>
+            <h3 id="grid">3. Grid - التخطيط الشبكي</h3>
             <div class="table-responsive">
                 <table>
                     <thead>
@@ -1142,7 +1293,7 @@
                 </pre>
             </div>
 
-            <h3>4. Position - موضع العنصر</h3>
+            <h3 id="position">4. Position - موضع العنصر</h3>
             <div class="table-responsive">
                 <table>
                     <thead>
@@ -1208,7 +1359,7 @@
             </div>
         
         <!-- الظلال والتأثيرات -->
-        <div class="section">
+        <div class="section" id="shadows-effects">
             <h2>✨ الظلال والتأثيرات</h2>
 
             <h3>الظلال</h3>
@@ -1267,7 +1418,7 @@
                 </pre>
             </div>
 
-            <h3>الحركات والانتقالات (Transitions)</h3>
+            <h3 id="transitions">الحركات والانتقالات (Transitions)</h3>
             <div class="table-responsive">
                 <table>
                     <thead>
@@ -1323,7 +1474,7 @@
                 </pre>
             </div>
 
-            <h3>الحركات (Animations)</h3>
+            <h3 id="animations">الحركات (Animations)</h3>
             <div class="table-responsive">
                 <table>
                     <thead>
@@ -1401,7 +1552,7 @@
             </div>
 
 
-            <h3>التأثيرات الأخرى (Filters)</h3>
+            <h3 id="filters">التأثيرات الأخرى (Filters)</h3>
             <div class="code-block">
                 <span class="code-label">مثال التأثيرات</span>
                 <pre>
@@ -1433,7 +1584,7 @@
         </div>
 
         <!-- المستجيبة والوسائط -->
-        <div class="section">
+        <div class="section " id="responsive-media">
             <h2>📱 التصميم المستجيب (Responsive Design)</h2>
 
             <p>يجب أن تتكيف الصفحة مع جميع أحجام الشاشات:</p>
@@ -1492,8 +1643,8 @@
         </div>
 
         <!-- الممارسات الأفضل -->
-        <div class="section">
-            <h2>🌟 الممارسات الأفضل في CSS</h2>
+        <div class="section" id="best-practices">
+            <h2 >🌟 الممارسات الأفضل في CSS</h2>
 
             <h3>1. استخدم متغيرات CSS</h3>
             <div class="code-block">
@@ -1571,5 +1722,30 @@
     <footer>
         💻 شرح تفصيلي لـ CSS | جميع الحقوق محفوظة © 2024
     </footer>
+
+    <button id="scrollToTopBtn" title="العودة للأعلى">↑</button>
+
+    <script>
+        // زر العودة للأعلى
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+        // إظهار/إخفاء الزر حسب التمرير
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        // العودة للأعلى عند الضغط على الزر
+        scrollToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
 </body>
 </html>
+

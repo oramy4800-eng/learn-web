@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>اختبار HTML للمحترفين فقط</title>
+    <link rel="stylesheet" href="style.css">
     <style>
         :root {
             --primary: #1a1a2e;
@@ -91,18 +92,153 @@
             display: none;
             margin-top: 30px;
             padding: 30px;
-            border-radius: 15px;
+            border-radius: 20px;
             text-align: center;
             font-size: 1.5rem;
+            animation: slideDown 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.2);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        /* زر العودة للأعلى */
+        #scrollToTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 50px;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #scrollToTopBtn.show {
+            display: flex;
+        }
+
+        #scrollToTopBtn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        #scrollToTopBtn:active {
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            #scrollToTopBtn {
+                bottom: 20px;
+                left: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+        }
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #7f8c8d;
+            transform: translateY(-2px);
+        }
+
+        /* أنماط التمييز بين الإجابات الصحيحة والخاطئة */
+        .question-block.correct {
+            background-color: #f0f8f0;
+            border-left: 4px solid #28a745;
+            padding-left: 16px;
+        }
+
+        .question-block.incorrect {
+            background-color: #fff5f5;
+            border-left: 4px solid #dc3545;
+            padding-left: 16px;
+        }
+
+        .correct-answer-msg {
+            margin-top: 15px;
+            padding: 12px;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 6px;
+            color: #155724;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .wrong-answer-msg {
+            margin-top: 15px;
+            padding: 12px;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 6px;
+            color: #721c24;
+            font-weight: bold;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
+    
     <header>
-        <h1>☠️ تحدي HTML المستوى "المستحيل"</h1>
-        <p>30 سؤالاً لن يجيب عليها إلا 1% من المطورين</p>
+        <h1>اختبار html الشامل</h1>
+        <div class="button-group">
+            <a href="index.html" class="btn btn-primary">← العودة للرئيسية</a>
+            <a href="css-detailed.html" class="btn btn-secondary">شرح CSS →</a>
+            <a href="js-detailed.html" class="btn btn-secondary">شرح JavaScript →</a>
+        </div>
     </header>
 
     <div class="quiz-card" id="quizForm">
@@ -286,15 +422,49 @@ function loadQuiz() {
 
 function calculateScore() {
     let score = 0;
-    questions.forEach((item, index) => {
+    let answered = 0;
+    const questionBlocks = document.querySelectorAll('.question-block');
+    
+    questionBlocks.forEach((block, index) => {
         const selected = document.querySelector(`input[name="q${index}"]:checked`);
-        if (selected && selected.value === item.correct) {
-            score++;
+        
+        // إزالة الأسلوب السابق
+        block.classList.remove('correct', 'incorrect');
+        const oldMsg = block.querySelector('.correct-answer-msg, .wrong-answer-msg');
+        if (oldMsg) oldMsg.remove();
+        
+        if (selected) {
+            answered++;
+            if (selected.value === questions[index].correct) {
+                score++;
+                block.classList.add('correct');
+                
+                // إضافة رسالة الإجابة الصحيحة
+                const msg = document.createElement('div');
+                msg.className = 'correct-answer-msg';
+                msg.textContent = '✅ إجابة صحيحة!';
+                block.appendChild(msg);
+            } else {
+                block.classList.add('incorrect');
+                
+                // إضافة رسالة الإجابة الخاطئة والصحيحة
+                const msg = document.createElement('div');
+                msg.className = 'wrong-answer-msg';
+                msg.innerHTML = `❌ إجابتك: <strong>${selected.value}</strong><br>الإجابة الصحيحة: <strong>${questions[index].correct}</strong>`;
+                block.appendChild(msg);
+            }
         }
     });
 
     const resultBox = document.getElementById('resultBox');
-    resultBox.style.display = "block";
+    
+    if (answered < 30) {
+        resultBox.style.display = "block";
+        resultBox.innerHTML = `⚠️ يرجى الإجابة على جميع الأسئلة (أجبت على ${answered} من 30)`;
+        resultBox.style.background = "#fff3cd";
+        window.scrollTo(0, 0);
+        return;
+    }
     
     let message = "";
     if (score === 30) {
@@ -302,14 +472,18 @@ function calculateScore() {
         resultBox.style.background = "#d4edda";
     } else if (score > 20) {
         message = "🔥 مذهل! أنت مطور محترف جداً.";
+        resultBox.style.background = "#c3e6cb";
+    } else if (score >= 15) {
+        message = "👍 جيد! لكن استمر في التدريب.";
         resultBox.style.background = "#fff3cd";
     } else {
         message = "📚 مستوى جيد، لكن HTML أعمق مما تظن. استمر في التعلم!";
         resultBox.style.background = "#f8d7da";
     }
 
-    resultBox.innerHTML = `نتيحتك: ${score} من 30 <br> ${message}`;
-    window.scrollTo(0, document.body.scrollHeight);
+    resultBox.style.display = "block";
+    resultBox.innerHTML = `نتيجتك: ${score} من 30 <br> ${message}`;
+    window.scrollTo(0, 0);
 }
 
 loadQuiz();
@@ -317,3 +491,27 @@ loadQuiz();
 
 </body>
 </html>
+
+<button id="scrollToTopBtn" title="العودة للأعلى">⬆</button>
+
+    <script>
+        // زر العودة للأعلى
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+        // إظهار/إخفاء الزر حسب التمرير
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        // العودة للأعلى عند الضغط على الزر
+        scrollToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>

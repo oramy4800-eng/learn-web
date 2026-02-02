@@ -300,17 +300,169 @@
                 width: 100%;
             }
         }
+
+        /* زر العودة للأعلى */
+        #scrollToTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 50px;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #scrollToTopBtn.show {
+            display: flex;
+        }
+
+        #scrollToTopBtn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        #scrollToTopBtn:active {
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            #scrollToTopBtn {
+                bottom: 20px;
+                left: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+        }
+        .nav-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-items-visible {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-items-hidden {
+            display: none;
+            gap: 15px;
+            flex-wrap: wrap;
+            flex-basis: 100%;
+            justify-content: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .nav-items-hidden.active {
+            display: flex;
+        }
+
+        .nav-toggle {
+            margin-top: 15px;
+            flex-basis: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 10px 20px;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .nav-toggle.active::before {
+            content: "▲ ";
+        }
+
+        .nav-toggle:not(.active)::before {
+            content: "▼ ";
+        }
+
+        @media (max-width: 768px) {
+            .nav-items-visible {
+                flex-basis: 100%;
+            }
+
+            .nav-items-hidden {
+                flex-basis: 100%;
+            }
+        }
     </style>
 </head>
 <body>
     <header>
         <h1 style="direction: rtl;">⚡ شرح لغة JavaScript التفصيلي</h1>
         <p style="direction: rtl;">إتقان البرمجة والتفاعل في الويب من الأساس</p>
+        <div class="button-group">
+            <a href="index.html" class="btn btn-primary">← العودة للرئيسية</a>
+            <a href="html-detailed.html" class="btn btn-secondary">شرح HTML ←</a>
+            <a href="css-detailed.html" class="btn btn-secondary">شرح CSS ←</a>
+        </div>
+        <div class="video btn btn-primary">
+            <a href="https://www.youtube.com/watch?v=gIGGhFlGgLI" target="_blank"> الكورس الأول (فيديو) click here</a>
+            <a href="https://www.youtube.com/watch?v=FKrfis1W1tk" target="_blank"> الكورس الثاني (فيديو) click here</a>
+        </div>
     </header>
 
     <div class="container">
+        <nav>
+            <div class="button-group nav-container">
+                <div class="nav-items-visible">
+                    <a href="#introduction" class="btn btn-primary">ما هي JavaScript؟</a>
+                    <a href="#language-basics" class="btn btn-primary">أساسيات اللغة</a>
+                    <a href="#ifelse" class="btn btn-primary">الشروط (If/Else)</a>
+                </div>
+                <div class="nav-items-hidden" id="moreItems">
+                    <a href="#loops" class="btn btn-primary"> الحلقات (Loops)</a>
+                    <a href="#functions" class="btn btn-primary">الدوال (Functions)</a>
+                    <a href="#objects-arrays" class="btn btn-primary"> الكائنات (Objects) والمصفوفات (Arrays)</a>
+                    <a href="#dom" class="btn btn-primary">التعامل مع DOM</a>
+                    <a href="#events" class="btn btn-primary"> الأحداث (Events)</a>
+                    <a href="#async-promises" class="btn btn-primary"> البرمجة غير المتزامنة (Async)</a>
+                    <a href="#json" class="btn btn-primary">JSON</a>
+                    <a href="#localstorage" class="btn btn-primary">LocalStorage - حفظ البيانات</a>
+                    <a href="#best-practices" class="btn btn-primary">الممارسات الأفضل في JavaScript</a>
+                </div>
+                <button class="btn btn-primary nav-toggle" id="toggleBtn" title="إظهار المزيد">
+                    ▼ المزيد
+                </button>
+            </div>
+        </nav>
+        <script>
+        // التحكم في قائمة التنقل المتوسعة
+        const toggleBtn = document.getElementById('toggleBtn');
+        const moreItems = document.getElementById('moreItems');
+
+        toggleBtn.addEventListener('click', function() {
+            moreItems.classList.toggle('active');
+            toggleBtn.classList.toggle('active');
+        });
+
+        // إغلاق القائمة عند النقر على أحد الروابط
+        const navLinks = moreItems.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                moreItems.classList.remove('active');
+                toggleBtn.classList.remove('active');
+            });
+        });
+    </script>
         <!-- مقدمة عن JavaScript -->
-        <div class="section">
+        <div class="section" id="introduction">
             <h2 style="direction: rtl;">🎯 ما هي لغة JavaScript؟</h2>
             <p style="direction: rtl;">JavaScript هي لغة برمجة تُستخدم لإضافة التفاعلية والحركة والوظائف الديناميكية لصفحات الويب. بينما HTML يحدد الهيكل و CSS يحدد المظهر، JavaScript يحدد السلوك والتفاعل.</p>
             
@@ -333,7 +485,7 @@ JavaScript = الحركة والشخصية</p>
         </div>
 
         <!-- أساسيات اللغة -->
-        <div class="section">
+        <div class="section" id="language-basics">
             <h2 style="direction: rtl;">🔧 أساسيات اللغة</h2>
 
             <h3 style="direction: rtl;">1. المتغيرات والثوابت</h3>
@@ -681,7 +833,7 @@ let notResult = !true;           // false // NOT (لا)
 
 
             <h3 style="direction: rtl;">3. الشروط (If/Else)</h3>
-            <div class="table-responsive">
+            <div class="table-responsive" id="ifelse">
                 <table>
                     <thead>
                         <tr>
@@ -745,7 +897,7 @@ if (age < 13) {
 
             </div>
 
-            <h3 style="direction: rtl;">4. الحلقات (Loops)</h3>
+            <h3 style="direction: rtl;" id="loops">4. الحلقات (Loops)</h3>
             <div class="table-responsive">
                 <table>
                     <thead>
@@ -846,7 +998,7 @@ for (let i = 0; i < 10; i++) {
         </div>
 
         <!-- الدوال -->
-        <div class="section">
+        <div class="section" id="functions">
             <h2 style="direction: rtl;">🔧 الدوال (Functions)</h2>
             <h3 style="direction: rtl;">أنواع الدوال</h3>
             <div class="table-responsive">
@@ -971,7 +1123,7 @@ console.log(sum(1, 2, 3, 4, 5)); // 15</code></pre>
         </div>
 
         <!-- الكائنات والمصفوفات -->
-        <div class="section">
+        <div class="section" id="objects-arrays">
             <h2 style="direction: rtl;">📦 الكائنات (Objects) والمصفوفات (Arrays)</h2>
               <h3 style="direction: rtl;">الكائنات والمصفوفات</h3>
             <p style="direction: rtl;">الكائنات والمصفوفات هما نوعان أساسيان من هياكل البيانات في JavaScript. الكائنات تُستخدم لتخزين البيانات في شكل أزواج مفتاح-قيمة، بينما المصفوفات تُستخدم لتخزين مجموعات مرتبة من القيم.</p>    
@@ -1236,7 +1388,7 @@ let back = str.split(","); // ["1", "2", "3"]</code></pre>
         </div>
 
         <!-- DOM -->
-        <div class="section">
+        <div class="section" id="dom">
             <h2 style="direction: rtl;">🎮 التعامل مع DOM</h2>
             <div class="table-responsive">
                 <table>
@@ -1369,7 +1521,7 @@ console.log(document.title);</code></pre>
         </div>
 
         <!-- الأحداث -->
-        <div class="section">
+        <div class="section" id="events">
             <h2 style="direction: rtl;">📢 الأحداث (Events)</h2>
             <div class="table-responsive">
                 <table>
@@ -1525,7 +1677,7 @@ element.addEventListener("click", (e) => {
         </div>
 
         <!-- async و promises -->
-        <div class="section">
+        <div class="section" id="async-promises">
             <h2 style="direction: rtl;">⏱️ البرمجة غير المتزامنة (Async)</h2>
             <div class="table-responsive">
                 <table>
@@ -1694,7 +1846,7 @@ async function fetchParallel() {
         <div class="section">
         <h2>💾 JSON و LocalStorage</h2>
 
-            <h3>JSON</h3>
+            <h3 id="json">JSON</h3>
             <div class="table-responsive">
                 <table>
                     <thead>
@@ -1768,7 +1920,7 @@ let filtered = JSON.stringify(person, ["name", "age"]);
 console.log(filtered); // {"name":"أحمد","age":30}</code></pre>
             </div>
 
-            <h3 style="direction: rtl;">LocalStorage - حفظ البيانات</h3>
+            <h3 style="direction: rtl;" id="localstorage">LocalStorage - حفظ البيانات</h3>
             <div class="table-responsive">
                 <table>
                     <thead>
@@ -1875,7 +2027,7 @@ for (let i = 0; i < localStorage.length; i++) {
         </div>
 
         <!-- الممارسات الأفضل -->
-        <div class="section">
+        <div class="section" id="best-practices">
             <h2 style="direction: rtl;">🌟 الممارسات الأفضل في JavaScript</h2>
 
             <h3 style="direction: rtl;">1. استخدم let و const بدلاً من var</h3>
@@ -1963,5 +2115,29 @@ function calculateCompoundInterest(principal, rate, years) {
     <footer style="direction: rtl;">
         💻 شرح تفصيلي لـ JavaScript | جميع الحقوق محفوظة © 2024
     </footer>
+
+    <button id="scrollToTopBtn" title="العودة للأعلى">⬆</button>
+
+    <script>
+        // زر العودة للأعلى
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+        // إظهار/إخفاء الزر حسب التمرير
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        // العودة للأعلى عند الضغط على الزر
+        scrollToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
 </body>
 </html>
